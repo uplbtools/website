@@ -16,24 +16,11 @@ export type ToolEntry = {
 
 export const tools: ToolEntry[] = [
   {
-    id: "kubo",
-    name: "Kubo",
-    description:
-      "A student housing platform that helps students find trusted places to stay and gives dorm owners the tools to reach more students, manage availability, and keep their rooms occupied.",
-    href: "https://www.facebook.com/findkubo/",
-    actionLabel: "Visit website",
-    status: "active",
-    statusLabel: "Active",
-    tags: ["Housing"],
-    screenshot: "/kubo-screenshot.png",
-    screenshotAlt: "Kubo student housing map showing dorm listings around UPLB",
-  },
-  {
     id: "room-tba",
     name: "Room TBA",
     description:
       "Look up room schedules, navigate between class buildings, and view jeepney routes around the UPLB campus.",
-    href: "https://room-tba.uplbtools.me",
+    href: "https://room-tba.uplb.tools",
     githubHref: "https://github.com/uplbtools/room-tba",
     actionLabel: "Launch app",
     status: "active",
@@ -43,6 +30,19 @@ export const tools: ToolEntry[] = [
     screenshotAlt: "Room TBA campus map and room search",
   },
   {
+    id: "kubo",
+    name: "Kubo",
+    description:
+      "A student housing platform that helps students find trusted places to stay and gives dorm owners the tools to reach more students, manage availability, and keep their rooms occupied.",
+    href: "https://www.facebook.com/findkubo/",
+    actionLabel: "Visit website",
+    status: "active",
+    statusLabel: "Community partner",
+    tags: ["Housing"],
+    screenshot: "/kubo-screenshot.png",
+    screenshotAlt: "Kubo student housing map showing dorm listings around UPLB",
+  },
+    {
     id: "gradesim",
     name: "Elbi GradeSim",
     description:
