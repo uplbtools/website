@@ -181,18 +181,14 @@ input:focus-visible {
 }
 
 .btn-primary {
-  background: linear-gradient(
-    160deg,
-    hsl(5, 58%, 40%),
-    var(--brand-maroon-deep)
-  );
+  background: var(--brand-maroon);
   color: var(--text-on-maroon);
   border-color: var(--brand-maroon-deep);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-  filter: brightness(1.05);
+  background: var(--brand-maroon-deep);
 }
 
 .btn-primary:focus-visible {
