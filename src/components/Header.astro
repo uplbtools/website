@@ -1,178 +1,100 @@
 ---
 import OpensInNewTab from "./OpensInNewTab.astro";
-
-const navLinks = [
-  { label: "Tools", href: "#tools" },
-  { label: "About", href: "#about" },
-  { label: "Contributors", href: "#contributors" },
-  { label: "Contribute", href: "#community" },
-];
 ---
-<header class="masthead">
-  <div class="container masthead__inner">
-    <p class="masthead__issue">
-      Student-run · Los Baños, Laguna · not an official UPLB website
-    </p>
-    <a href="/" class="masthead__wordmark" aria-label="uplb.tools home">
-      uplb<span class="masthead__dot">.</span>tools
+<header class="main-header">
+  <div class="container header-container">
+    <a href="/" class="logo" aria-label="uplb.tools home">
+      <img
+        src="/icon.png"
+        alt=""
+        width="24"
+        height="24"
+        class="logo-icon"
+        decoding="async"
+        aria-hidden="true"
+      />
+      uplb<span class="logo-dot">.</span>tools
     </a>
 
-    <nav class="masthead__nav" aria-label="Site">
-      {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
-      <a
-        href="https://github.com/uplbtools"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub&nbsp;↗
-        <OpensInNewTab />
-      </a>
-      <a href="https://room-tba.uplb.tools/donate" class="masthead__donate">
-        Donate
-      </a>
-    </nav>
-
-    <details class="masthead__menu">
-      <summary>Menu</summary>
-      <nav aria-label="Site">
-        {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
-        <a
-          href="https://github.com/uplbtools"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub&nbsp;↗
-          <OpensInNewTab />
-        </a>
-        <a href="https://room-tba.uplb.tools/donate">Donate</a>
-      </nav>
-    </details>
+    <a
+      href="https://github.com/uplbtools"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-secondary btn-sm-nav"
+      aria-label="uplbtools organization on GitHub"
+    >
+      <img
+        src="/brand/github.svg"
+        alt=""
+        width="14"
+        height="14"
+        class="header-github-icon"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <span>GitHub</span>
+      <OpensInNewTab />
+    </a>
   </div>
 </header>
 
 <style>
-  .masthead {
-    padding-top: var(--space-lg);
-    border-bottom: 4px double var(--border);
+  .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    height: var(--header-height);
+    background-color: var(--bg-page);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
-  .masthead__inner {
+  .header-container {
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
-  .masthead__issue {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--text-muted);
-    margin-bottom: var(--space-2xs);
-  }
-
-  .masthead__wordmark {
+  .logo {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.375rem;
     font-family: var(--font-display);
+    font-size: 0.9375rem;
     font-weight: 700;
-    font-size: clamp(2.5rem, 7vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.03em;
     color: var(--text-ink);
-    min-height: 2.75rem;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .masthead__dot {
-    color: var(--brand-maroon);
-  }
-
-  .masthead__nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    column-gap: var(--space-md);
-    margin-top: var(--space-2xs);
-  }
-
-  .masthead__nav a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--text-body);
     white-space: nowrap;
+    line-height: 1;
   }
 
-  .masthead__nav a:hover {
+  .logo-dot {
     color: var(--brand-maroon);
+    margin: 0 -0.05em;
   }
 
-  .masthead__donate {
-    color: var(--brand-maroon) !important;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.25em;
+  .logo-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
   }
 
-  .masthead__menu {
-    display: none;
+  .btn-sm-nav {
+    min-height: 2.75rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8125rem;
   }
 
-  @media (max-width: 40rem) {
-    .masthead__nav {
-      display: none;
-    }
-
-    .masthead__menu {
-      display: block;
-      width: 100%;
-      margin-top: var(--space-2xs);
-    }
-
-    .masthead__menu summary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 2.75rem;
-      padding: 0 var(--space-sm);
-      font-size: var(--text-sm);
-      font-weight: 600;
-      color: var(--text-body);
-      cursor: pointer;
-      list-style: none;
-    }
-
-    .masthead__menu summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .masthead__menu summary::after {
-      content: "▾";
-      margin-left: 0.4ch;
-      color: var(--brand-maroon);
-    }
-
-    .masthead__menu[open] summary::after {
-      content: "▴";
-    }
-
-    .masthead__menu nav {
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .masthead__menu nav a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 2.75rem;
-      font-size: var(--text-sm);
-      font-weight: 600;
-      color: var(--text-body);
-    }
+  .header-github-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    display: block;
+    flex-shrink: 0;
   }
 </style>
