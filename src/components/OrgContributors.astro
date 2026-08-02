@@ -17,46 +17,39 @@ try {
 }
 ---
 
-<section id="contributors" class="section contributors-section" aria-labelledby="contributors-heading">
+<section id="contributors" class="section staff-section" aria-labelledby="contributors-heading">
   <div class="container">
-    <div class="contributors-header">
-      <div>
-        <h2 id="contributors-heading" class="section-title">Top contributors</h2>
-        <p class="section-subtitle">
-          Commit history across public <code>uplbtools</code> GitHub repositories.
-          Bots and automated accounts are filtered out.
-        </p>
-      </div>
+    <h2 id="contributors-heading" class="index-head">Contributors</h2>
+    <p class="staff-note">
+      Commit history across public <code>uplbtools</code> repositories, bots
+      filtered out.
       <a
         href="https://github.com/uplbtools"
         target="_blank"
         rel="noopener noreferrer"
-        class="btn btn-secondary"
-        aria-label="View uplbtools organization on GitHub"
+        class="tlink"
+        >Full list on GitHub&nbsp;↗<OpensInNewTab /></a
       >
-        View org on GitHub
-        <OpensInNewTab />
-      </a>
-    </div>
+    </p>
 
     {
       loadError ? (
-        <p class="contributors-status contributors-status--error" role="alert">
+        <p class="staff-status" role="alert">
           {loadError}
         </p>
       ) : contributors.length === 0 ? (
-        <p class="contributors-status" role="status">
+        <p class="staff-status" role="status">
           No public contributors found yet. Check back after the next deploy.
         </p>
       ) : (
-        <ul class="contributors-grid">
+        <ul class="staff-list">
           {contributors.map((person) => {
             const displayName = person.name ?? person.login;
             const commits = formatGithubContributions(person.contributions);
             return (
               <li>
                 <a
-                  class="contributor-card card"
+                  class="staff-row"
                   href={person.profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -65,18 +58,15 @@ try {
                   <img
                     src={person.avatarUrl}
                     alt=""
-                    width="64"
-                    height="64"
+                    width="28"
+                    height="28"
                     loading="lazy"
                     decoding="async"
-                    class="contributor-card__avatar"
+                    class="staff-row__avatar"
                     aria-hidden="true"
                   />
-                  <span class="contributor-card__name">{displayName}</span>
-                  {person.name ? (
-                    <span class="contributor-card__login">@{person.login}</span>
-                  ) : null}
-                  <span class="contributor-card__commits">{commits}</span>
+                  <span class="staff-row__name">{displayName}</span>
+                  <span class="staff-row__commits">{commits}</span>
                   <OpensInNewTab />
                 </a>
               </li>
@@ -89,90 +79,79 @@ try {
 </section>
 
 <style>
-  .contributors-section {
-    background: linear-gradient(
-      180deg,
-      var(--bg-page) 0%,
-      hsl(5, 20%, 94%) 100%
-    );
+  .staff-section {
+    border-bottom: 1px solid var(--border-subtle);
   }
 
-  .contributors-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-bottom: 1.75rem;
-    flex-wrap: wrap;
+  .staff-note {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
   }
 
-  .contributors-header .section-title {
-    margin-top: 0;
-  }
-
-  .contributors-header code {
+  .staff-note code {
+    font-family: var(--font-mono);
     font-size: 0.9em;
     color: var(--brand-maroon);
   }
 
-  .contributors-status {
+  .staff-note .tlink {
+    min-height: 0;
+    margin-left: 0.5ch;
+  }
+
+  .staff-status {
     margin: 0;
-    font-size: 0.9375rem;
+    font-size: var(--text-sm);
     color: var(--text-muted);
   }
 
-  .contributors-status--error {
-    color: hsl(0, 55%, 36%);
-  }
-
-  .contributors-grid {
+  .staff-list {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
-    gap: 0.85rem;
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    column-gap: var(--space-md);
   }
 
-  .contributor-card {
+  .staff-row {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: 1rem 0.75rem;
-    gap: 0.25rem;
-    min-height: 100%;
+    gap: var(--space-2xs);
+    min-height: 2.75rem;
+    padding: var(--space-3xs) 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: var(--text-sm);
   }
 
-  .contributor-card:hover {
-    border-color: var(--border-accent);
+  .staff-row:hover .staff-row__name {
+    color: var(--brand-maroon);
   }
 
-  .contributor-card__avatar {
-    width: 4rem;
-    height: 4rem;
+  .staff-row__avatar {
+    width: 1.75rem;
+    height: 1.75rem;
     border-radius: 999px;
     object-fit: cover;
-    border: 2px solid var(--border-subtle);
-    margin-bottom: 0.35rem;
+    border: 1px solid var(--border-subtle);
+    flex-shrink: 0;
   }
 
-  .contributor-card__name {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--text-ink);
-    line-height: 1.3;
-  }
-
-  .contributor-card__login {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
-  .contributor-card__commits {
-    margin-top: 0.15rem;
-    font-size: 0.75rem;
+  .staff-row__name {
     font-weight: 600;
-    color: var(--brand-maroon);
+    color: var(--text-ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .staff-row__commits {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    white-space: nowrap;
   }
 </style>

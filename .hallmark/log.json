@@ -1,0 +1,13 @@
+[
+  {
+    "date": "2026-08-03",
+    "scope": "app",
+    "macrostructure": "Index-First",
+    "theme": "Room TBA (locked external system, design.md)",
+    "theme_axes": "light-warm / classical-serif / warm-maroon",
+    "nav": "N6 masthead (issue-below, wordmark-2xl, double-rule)",
+    "footer": "Ft4 colophon (mono, single-block, date+attribution)",
+    "enrichment": "none",
+    "brief": "uplb.tools org landing adopts Room TBA design system"
+  }
+]
