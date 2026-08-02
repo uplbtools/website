@@ -2,20 +2,22 @@
 import { tools } from "../data/tools";
 import OpensInNewTab from "./OpensInNewTab.astro";
 ---
-<section id="tools" class="tools-section" aria-labelledby="tools-heading">
+<section id="tools" class="dir-section" aria-labelledby="tools-heading">
   <div class="container">
-    <div class="tools-header">
-      <h2 id="tools-heading" class="section-title">Campus tools</h2>
-      <p class="section-subtitle">
-        Open-source utilities for UPLB students. Pick a tool and go.
-      </p>
-    </div>
+    <h2 id="tools-heading" class="index-head">Tool index</h2>
 
-    <div class="tools-grid" role="list">
+    <ul class="dir" role="list">
       {
         tools.map((tool) => (
-          <article class="tool-card card" role="listitem">
-            <div class="tool-card__preview">
+          <li class:list={["dir-row", { "dir-row--flagship": tool.flagship }]}>
+            <a
+              class="dir-row__thumb"
+              href={tool.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabindex="-1"
+              aria-hidden="true"
+            >
               <img
                 src={tool.screenshot}
                 alt={tool.screenshotAlt}
@@ -24,143 +26,134 @@ import OpensInNewTab from "./OpensInNewTab.astro";
                 loading="lazy"
                 decoding="async"
               />
-            </div>
-            <div class="tool-card__body">
-              <div class="tool-card__tags" aria-label="Categories">
-                {tool.tags.map((tag) => (
-                  <span class="badge">{tag}</span>
-                ))}
-                <span class={`badge badge-${tool.status === "live" ? "green" : "maroon"}`}>
+            </a>
+            <div class="dir-row__body">
+              <h3 class="dir-row__name">
+                {tool.name}
+                <span
+                  class:list={[
+                    "badge",
+                    tool.status === "live" ? "badge-green" : "badge-maroon",
+                  ]}
+                >
                   {tool.statusLabel}
                 </span>
-              </div>
-              <h3 class="tool-card__title">{tool.name}</h3>
-              <p class="tool-card__desc">{tool.description}</p>
-              <div class="tool-card__actions">
+              </h3>
+              <p class="dir-row__desc">{tool.description}</p>
+              {tool.stats ? (
+                <p class="dir-row__stats">{tool.stats.join(" · ")}</p>
+              ) : null}
+              <p class="dir-row__actions">
                 <a
                   href={tool.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="btn btn-primary btn-sm"
+                  class="tlink"
                 >
-                  {tool.actionLabel}
+                  {tool.actionLabel}&nbsp;↗
                   <OpensInNewTab />
                 </a>
-                {
-                  tool.githubHref ? (
-                    <a
-                      href={tool.githubHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="btn btn-secondary btn-sm"
-                      aria-label={`${tool.name} source on GitHub`}
-                    >
-                      GitHub
-                      <OpensInNewTab />
-                    </a>
-                  ) : null
-                }
-              </div>
+                {tool.githubHref ? (
+                  <a
+                    href={tool.githubHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="tlink"
+                    aria-label={`${tool.name} source on GitHub`}
+                  >
+                    GitHub&nbsp;↗
+                    <OpensInNewTab />
+                  </a>
+                ) : null}
+              </p>
             </div>
-          </article>
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </section>
 
 <style>
-  .tools-section {
-    padding: 1.25rem 0 4rem;
+  .dir-section {
+    padding: var(--space-xl) 0;
     border-bottom: 1px solid var(--border-subtle);
   }
 
-  .tools-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-bottom: 2rem;
+  .dir {
     list-style: none;
-    padding: 0;
-    margin-top: 0;
-  }
-
-  .tool-card {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    margin: 0;
     padding: 0;
   }
 
-  .tool-card__preview {
-    border-bottom: 1px solid var(--border-subtle);
-    background: var(--bg-panel);
-    overflow: hidden;
+  .dir-row {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-top: 1px solid var(--border-subtle);
+    align-items: start;
   }
 
-  .tool-card__preview img {
+  .dir-row--flagship {
+    grid-template-columns: 16rem minmax(0, 1fr);
+  }
+
+  .dir-row__thumb img {
+    display: block;
     width: 100%;
+    max-width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    display: block;
-    transition: transform 0.2s ease;
+    object-position: top left;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--bg-panel);
   }
 
-  .tool-card:hover .tool-card__preview img {
-    transform: scale(1.02);
-  }
-
-  .tool-card__body {
+  .dir-row__name {
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 1.25rem;
-    gap: 0.5rem;
-  }
-
-  .tool-card__tags {
-    display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 0.35rem;
-  }
-
-  .tool-card__title {
+    gap: var(--space-2xs);
     font-family: var(--font-display);
-    font-size: 1.125rem;
-    margin: 0;
+    font-weight: 700;
+    font-size: var(--text-xl);
+    line-height: 1.2;
+    margin-bottom: var(--space-3xs);
   }
 
-  .tool-card__desc {
-    font-size: 0.875rem;
-    line-height: 1.5;
-    flex: 1;
-    margin: 0;
+  .dir-row--flagship .dir-row__name {
+    font-size: var(--text-2xl);
   }
 
-  .tool-card__actions {
+  .dir-row__desc {
+    font-size: var(--text-sm);
+    max-width: 40rem;
+    margin-bottom: var(--space-3xs);
+  }
+
+  .dir-row__stats {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-bottom: var(--space-3xs);
+  }
+
+  .dir-row__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    column-gap: var(--space-md);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .tool-card__preview img {
-      transition: none;
+  @media (max-width: 40rem) {
+    .dir-row,
+    .dir-row--flagship {
+      grid-template-columns: minmax(0, 1fr);
     }
 
-    .tool-card:hover .tool-card__preview img {
-      transform: none;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .tools-grid {
-      grid-template-columns: 1fr;
+    .dir-row__thumb {
+      max-width: 22rem;
     }
   }
 </style>

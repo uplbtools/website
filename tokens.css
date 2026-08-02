@@ -1,0 +1,54 @@
+/* uplb.tools design tokens — Room TBA locked system (see design.md).
+ * Canonical copy also lives at the top of src/styles/global.css; keep in sync. */
+:root {
+  --brand-maroon: hsl(5, 53%, 32%);
+  --brand-maroon-deep: hsl(5, 55%, 27%);
+  --brand-maroon-muted: hsl(5, 40%, 94%);
+  --brand-green: hsl(152, 45%, 28%);
+  --brand-green-muted: hsl(152, 35%, 92%);
+
+  --bg-page: hsl(5, 22%, 96%);
+  --bg-surface: hsl(5, 20%, 97%);
+  --bg-panel: hsl(5, 18%, 96%);
+  --bg-elevated: hsl(0, 0%, 100%);
+
+  --border: hsl(5, 10%, 68%);
+  --border-subtle: hsl(5, 12%, 88%);
+  --border-accent: hsl(5, 40%, 42%);
+
+  --text-ink: hsl(5, 12%, 16%);
+  --text-body: hsl(5, 14%, 24%);
+  --text-muted: hsl(5, 10%, 38%);
+  --text-on-maroon: hsl(0, 0%, 100%);
+
+  --color-focus: var(--brand-maroon);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2.25rem;
+  --text-display: clamp(2.5rem, 6vw, 4rem);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 150ms;
+}

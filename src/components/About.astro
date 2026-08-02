@@ -2,104 +2,103 @@
 ---
 <section id="about" class="section about-section" aria-labelledby="about-heading">
   <div class="container">
-    <div class="about-grid">
-      <div class="about-intro">
-        <h2 id="about-heading" class="section-title">
-          An open codebase and incubator for student developers
-        </h2>
-        <p class="about-desc">
-          We are an independent developer collective building lightweight,
-          privacy-first tools for the UPLB community, while mentoring the next
-          generation of engineers and designers.
+    <h2 id="about-heading" class="index-head">About</h2>
+
+    <div class="about-cols">
+      <div class="about-prose">
+        <p>
+          uplb.tools is an independent collective of UPLB students building
+          free tools for campus life: finding rooms, planning schedules,
+          simulating grades. Everything is open source end to end. The code is
+          MIT-licensed, and Room TBA's community-maintained campus data is
+          published as open data under CC-BY 4.0.
         </p>
-        <p class="about-desc">
-          We build tools that make campus enlistment, navigation, and
-          administrative simulator processes smoother. Each of our tools is
-          entirely open source, client-side, and designed to respect student
-          privacy.
-        </p>
-        <p class="about-desc">
-          uplb.tools also functions as a structured training sandbox. Student
-          contributors collaborate via GitHub pull requests, learning software
-          engineering fundamentals, design workflows, and release cycles.
+        <p>
+          The org doubles as a training ground. Student contributors work
+          through real GitHub pull requests, code review, and release cycles
+          on apps with real users, the kind of experience coursework rarely
+          provides.
         </p>
       </div>
-
-      <ul class="about-principles">
-        <li class="principle-item card">
-          <h3>01 / Utility driven</h3>
-          <p>
-            We build to solve specific friction points in registration, schedule
-            planning, and grading trackers.
-          </p>
-        </li>
-
-        <li class="principle-item card">
-          <h3>02 / Educational sandbox</h3>
-          <p>
-            We bridge the gap between academic theory and real-world development
-            cycles using peer code reviews.
-          </p>
-        </li>
-
-        <li class="principle-item card">
-          <h3>03 / Zero tracking</h3>
-          <p>
-            No analytics engines, zero student tracking scripts, and no
-            server-side databases.
-          </p>
-        </li>
-      </ul>
+      <dl class="about-principles">
+        <div class="principle">
+          <dt>Useful first</dt>
+          <dd>
+            Every tool exists because a specific campus friction did:
+            enlistment, finding rooms, forecasting a GWA.
+          </dd>
+        </div>
+        <div class="principle">
+          <dt>Open by default</dt>
+          <dd>
+            Public repos, open data, public roadmaps. Fork Room TBA for your
+            own campus; the license invites it.
+          </dd>
+        </div>
+        <div class="principle">
+          <dt>Respectful of students</dt>
+          <dd>
+            No ads, no data sold, no tracking beyond cookieless page
+            analytics. Donations, not attention, keep the servers on.
+          </dd>
+        </div>
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
-  .about-grid {
+  .about-section {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .about-cols {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--space-xl);
     align-items: start;
   }
 
-  .about-desc {
-    font-size: 0.9375rem;
-    line-height: 1.65;
-    color: var(--text-body);
-    margin-bottom: 1rem;
+  .about-prose p {
+    font-size: var(--text-md);
+    margin-bottom: var(--space-sm);
+    max-width: 38rem;
+  }
+
+  .about-prose p:last-child {
+    margin-bottom: 0;
   }
 
   .about-principles {
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    gap: var(--space-md);
   }
 
-  .principle-item {
-    padding: 1.25rem 1.35rem;
-    border-left: 3px solid var(--brand-maroon);
+  .principle {
+    padding-left: var(--space-sm);
+    border-left: 2px solid var(--brand-maroon);
   }
 
-  .principle-item h3 {
-    font-size: 0.875rem;
+  .principle dt {
     font-weight: 700;
-    margin-bottom: 0.35rem;
+    font-size: var(--text-sm);
+    color: var(--text-ink);
+    margin-bottom: var(--space-3xs);
   }
 
-  .principle-item p {
-    font-size: 0.875rem;
-    line-height: 1.55;
+  .principle dd {
     margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.55;
     color: var(--text-body);
   }
 
-  @media (max-width: 768px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+  @media (max-width: 48rem) {
+    .about-cols {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-lg);
     }
   }
 </style>
