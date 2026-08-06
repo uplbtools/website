@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import OpensInNewTab from '../components/OpensInNewTab.astro';
+---
+
+<Layout
+  title="About"
+  description="Who builds uplb.tools: an independent, student-led open-source collective making free campus utilities for UP Los Baños."
+>
+ <Header />
+ <main id="main-content" class="legal-main">
+ <div class="container legal-container">
+ <a href="/" class="legal-back">&larr; Home</a>
+
+ <header class="legal-hero">
+ <p class="legal-eyebrow">About</p>
+ <h1>About uplb.tools</h1>
+ <p class="legal-lede">
+ <strong>uplb.tools</strong> is an independent, student-led open-source
+ collective at the University of the Philippines Los Baños. We are
+ <strong>not</strong> officially affiliated with, endorsed by, or
+ representing the UPLB administration.
+ </p>
+ </header>
+
+ <article class="legal-body">
+ <section>
+ <h2>Who we are</h2>
+ <p>
+ We are UPLB students and alumni who build free campus utilities in our
+ spare time. The project started with Room TBA, a campus map that answers
+ the question every freshman asks during enlistment: where is this room?
+ It grew into a small collective (Elbi Student Developers) that now
+ maintains several tools and mentors new contributors along the way.
+ </p>
+ </section>
+
+ <section>
+ <h2>What we build</h2>
+ <ul>
+ <li>
+ <strong>Room TBA.</strong> An interactive campus map for finding rooms,
+ buildings, dorms, and jeepney routes, plus a schedule planner and a
+ wiki of enlistment guides.
+ </li>
+ <li>
+ <strong>Elbi GradeSim.</strong> A browser extension that simulates
+ grades and GWA without leaving the student portal.
+ </li>
+ <li>
+ <strong>Smaller experiments.</strong> Schedule tools, visualizers, and
+ whatever campus friction point a contributor wants to solve next.
+ </li>
+ </ul>
+ <p>
+ Everything is open source under MIT on
+ <a href="https://github.com/uplbtools" target="_blank" rel="noopener noreferrer">GitHub<OpensInNewTab /></a>,
+ and the campus map data is CC-BY open data.
+ </p>
+ </section>
+
+ <section>
+ <h2>How we work</h2>
+ <p>
+ uplb.tools doubles as a training ground. Contributors learn real
+ software engineering through pull requests, peer code review, and
+ release cycles. If you are a student who wants to ship something people
+ actually use, this is a good place to start.
+ </p>
+ </section>
+
+ <section>
+ <h2>How we are funded</h2>
+ <p>
+ Donations from students and alumni, a small set of manually curated
+ local sponsors, and a limited ad experiment on content pages. Ads stay
+ off the interactive map. Details are in our
+ <a href="/privacy">privacy policy</a>.
+ </p>
+ </section>
+
+ <section>
+ <h2>Contact</h2>
+ <p>
+ Open a discussion on
+ <a href="https://github.com/uplbtools" target="_blank" rel="noopener noreferrer">GitHub<OpensInNewTab /></a>
+ or reach volunteers through our
+ <a href="https://discord.uplbtools.me" target="_blank" rel="noopener noreferrer">Discord<OpensInNewTab /></a>.
+ </p>
+ </section>
+ </article>
+ </div>
+ </main>
+ <Footer />
+</Layout>
+
+<style>
+.legal-main {
+ min-height: 100vh;
+ padding-top: 4rem;
+ padding-bottom: 2rem;
+ border-bottom: 1px solid var(--border-subtle);
+ }
+
+.legal-container {
+ max-width: 44rem;
+ }
+
+.legal-back {
+ font-size: 0.85rem;
+ color: var(--text-muted);
+ text-decoration: none;
+ display: inline-block;
+ margin-bottom: 2rem;
+ }
+
+.legal-back:hover {
+ color: var(--brand-maroon);
+ }
+
+.legal-eyebrow {
+ font-size: 0.75rem;
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.08em;
+ color: var(--text-muted);
+ margin: 0 0 0.75rem;
+ }
+
+.legal-hero h1 {
+ font-size: clamp(1.75rem, 4vw, 2.25rem);
+ margin: 0 0 1rem;
+ }
+
+.legal-lede {
+ margin: 0 0 2.5rem;
+ font-size: 0.95rem;
+ }
+
+.legal-body section {
+ margin-bottom: 2rem;
+ }
+
+.legal-body h2 {
+ font-size: 1.15rem;
+ margin: 0 0 0.75rem;
+ }
+
+.legal-body ul {
+ margin: 0.5rem 0 0;
+ padding-left: 1.25rem;
+ }
+
+.legal-body li {
+ margin-bottom: 0.5rem;
+ }
+
+.legal-body a {
+ color: var(--brand-maroon);
+ text-decoration: underline;
+ text-underline-offset: 2px;
+ }
+
+.legal-body a:hover {
+ color: var(--brand-maroon-deep);
+ }
+</style>
