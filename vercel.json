@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "uplbtools.me" }],
+      "destination": "https://www.uplb.tools/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.uplbtools.me" }],
+      "destination": "https://www.uplb.tools/:path*",
+      "permanent": true
+    }
+  ]
+}
