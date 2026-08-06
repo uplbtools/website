@@ -1,4 +1,4 @@
-export const SITE_ORIGIN = "https://uplbtools.me";
+export const SITE_ORIGIN = "https://www.uplb.tools";
 export const SITE_NAME = "uplb.tools";
 
 export const DEFAULT_TITLE = "uplb.tools";
