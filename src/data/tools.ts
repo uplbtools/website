@@ -30,6 +30,19 @@ export const tools: ToolEntry[] = [
     screenshotAlt: "Room TBA campus map and room search",
   },
   {
+    id: "uppetite",
+    name: "UPPETITE",
+    description:
+      "Food that fits your break. Pick where you are, your next class, and how long you have, and get only the food stops that fit the walk around Elbi.",
+    href: "https://uppetite.uplb.tools",
+    actionLabel: "Launch app",
+    status: "active",
+    statusLabel: "Active",
+    tags: ["Food"],
+    screenshot: "/uppetite-screenshot.png",
+    screenshotAlt: "UPPETITE break planner choosing a building, next class, and break time to find food stops",
+  },
+  {
     id: "kubo",
     name: "Kubo",
     description:
