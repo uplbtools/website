@@ -1,106 +1,44 @@
 ---
 ---
 <section id="about" class="section about-section" aria-labelledby="about-heading">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-intro">
-        <h2 id="about-heading" class="section-title">
-          An open codebase and incubator for student developers
-        </h2>
-        <p class="about-desc">
-          We are an independent developer collective building lightweight,
-          privacy-first tools for the UPLB community, while mentoring the next
-          generation of engineers and designers.
-        </p>
-        <p class="about-desc">
-          We build tools that make campus enlistment, navigation, and
-          administrative simulator processes smoother. Each of our tools is
-          entirely open source, client-side, and designed to respect student
-          privacy.
-        </p>
-        <p class="about-desc">
-          uplb.tools also functions as a structured training sandbox. Student
-          contributors collaborate via GitHub pull requests, learning software
-          engineering fundamentals, design workflows, and release cycles.
-        </p>
-      </div>
-
-      <ul class="about-principles">
-        <li class="principle-item card">
-          <h3>01 / Utility driven</h3>
-          <p>
-            We build to solve specific friction points in registration, schedule
-            planning, and grading trackers.
-          </p>
-        </li>
-
-        <li class="principle-item card">
-          <h3>02 / Educational sandbox</h3>
-          <p>
-            We bridge the gap between academic theory and real-world development
-            cycles using peer code reviews.
-          </p>
-        </li>
-
-        <li class="principle-item card">
-          <h3>03 / Privacy first</h3>
-          <p>
-            No data sold, no tracking beyond cookieless page analytics, and
-            any ads stay off the interactive map. Code is MIT and the campus
-            map data is CC-BY open data.
-          </p>
-        </li>
-      </ul>
-    </div>
+  <div class="container container--narrow">
+    <h2 id="about-heading" class="section-title">
+      Sino kami
+    </h2>
+    <p class="about-lede">
+      uplb.tools is a group of UPLB students who build small, free tools for
+      campus life and learn software engineering by shipping them.
+    </p>
+    <p>
+      Every tool is open source under MIT. The campus map data in Room TBA is
+      published as open data under CC BY 4.0, so other campuses can fork it.
+      UP Visayas, UP Baguio, and BulSU already have.
+    </p>
+    <p>
+      We do not sell data. There is no tracking beyond cookieless page counts,
+      and ads stay off the interactive map. Hosting and contributor payouts are
+      covered by donations.
+    </p>
+    <p>
+      New contributors learn on real pull requests, with code review, release
+      cycles, and a good first issue queue. Walang entrance exam. Kung kaya mong
+      mag-git push, kaya mong tumulong.
+    </p>
   </div>
 </section>
 
 <style>
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 2.5rem;
-    align-items: start;
+  .about-section {
+    border-bottom: 1px solid var(--border-card);
   }
 
-  .about-desc {
-    font-size: 0.9375rem;
-    line-height: 1.65;
-    color: var(--text-body);
-    margin-bottom: 1rem;
+  .about-section p + p {
+    margin-top: 1rem;
   }
 
-  .about-principles {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .principle-item {
-    padding: 1.25rem 1.35rem;
-    border-left: 3px solid var(--brand-maroon);
-  }
-
-  .principle-item h3 {
-    font-size: 0.875rem;
-    font-weight: 700;
-    margin-bottom: 0.35rem;
-  }
-
-  .principle-item p {
-    font-size: 0.875rem;
-    line-height: 1.55;
-    margin: 0;
-    color: var(--text-body);
-  }
-
-  @media (max-width: 768px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
+  .about-lede {
+    font-size: 1.125rem;
+    color: var(--text-ink);
+    margin-top: 0.5rem;
   }
 </style>
