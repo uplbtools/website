@@ -10,15 +10,20 @@ const { overlay = false } = Astro.props;
 <header class:list={["main-header", { "main-header--overlay": overlay }]}>
   <div class="container header-container">
     <a href="/" class="logo" aria-label="uplb.tools home">
-      <img
-        src="/icon.png"
-        alt=""
-        width="24"
-        height="24"
-        class="logo-icon"
-        decoding="async"
+      <svg
+        class="logo-mark"
+        viewBox="0 0 32 32"
+        width="28"
+        height="28"
         aria-hidden="true"
-      />
+        focusable="false"
+      >
+        <rect width="32" height="32" rx="9" class="logo-mark__tile" />
+        <path
+          class="logo-mark__pin"
+          d="M16 7.5c-3.6 0-6.5 2.9-6.5 6.4 0 4.7 5.7 10 6 10.2a.8.8 0 0 0 1 0c.3-.2 6-5.5 6-10.2 0-3.5-2.9-6.4-6.5-6.4Zm0 8.9a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
+        />
+      </svg>
       <span class="logo-word">uplb<span class="logo-dot">.</span>tools</span>
     </a>
 
@@ -117,12 +122,32 @@ const { overlay = false } = Astro.props;
     color: var(--brand-maroon);
   }
 
-  .logo-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    object-fit: contain;
+  .main-header--overlay .logo-dot {
+    color: hsl(35 100% 82%);
+  }
+
+  /* Mark is a map pin, not a generic toolbox: every tool here starts at
+     the campus map. Inline SVG so it stays sharp and recolors with the
+     header (maroon tile on light, white-on-transparent over the photo). */
+  .logo-mark {
+    width: 1.75rem;
+    height: 1.75rem;
     flex-shrink: 0;
     display: block;
+  }
+
+  .logo-mark__tile {
+    fill: var(--brand-maroon);
+  }
+
+  .logo-mark__pin {
+    fill: #fff;
+  }
+
+  .main-header--overlay .logo-mark__tile {
+    fill: hsl(0 0% 100% / 0.16);
+    stroke: hsl(0 0% 100% / 0.5);
+    stroke-width: 1;
   }
 
   .header-nav {

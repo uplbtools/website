@@ -1,6 +1,7 @@
 ---
 import OpensInNewTab from "./OpensInNewTab.astro";
 ---
+
 <section class="hero-section" aria-labelledby="hero-title">
   <img
     class="hero-photo"
@@ -10,48 +11,55 @@ import OpensInNewTab from "./OpensInNewTab.astro";
     width="1920"
     height="1280"
   />
-  <div class="hero-shade" aria-hidden="true"></div>
+  <!-- Two scrims, not one flat wash. The vertical pass darkens the navbar
+       strip and the foot; the horizontal pass puts real weight only under
+       the copy column, so the tree and sun stay visible on the right. -->
+  <div class="hero-veil hero-veil--vertical" aria-hidden="true"></div>
+  <div class="hero-veil hero-veil--reading" aria-hidden="true"></div>
+
+  <div class="container hero-container">
+    <div class="hero-copy">
+      <h1 id="hero-title" class="hero-title">
+        Free, open-source tools for UP Los Baños
+      </h1>
+      <p class="hero-lede">Room TBA, the campus map. Gawa ng isko't iska.</p>
+      <p class="hero-sub">
+        Plus food, housing, grades, and a campus directory, all built and run by
+        UPLB students. No accounts, no tracking, code on GitHub.
+      </p>
+      <div class="hero-actions">
+        <a
+          href="https://room-tba.uplb.tools"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Open Room TBA
+          <OpensInNewTab />
+        </a>
+        <a href="#tools" class="btn btn-secondary">See all tools</a>
+      </div>
+    </div>
+  </div>
+
   <a
     class="hero-credit"
     href="https://commons.wikimedia.org/wiki/File:Fertilty_Tree.jpg"
     target="_blank"
     rel="noopener noreferrer"
   >
-    Fertility Tree photo: Klienneeco, CC BY-SA 4.0, color graded
+    Photo: Klienneeco, CC BY-SA 4.0
   </a>
-  <div class="container container--narrow hero-container">
-    <h1 id="hero-title" class="hero-title">
-      Free, open-source tools for UP Los Baños
-    </h1>
-    <p class="hero-lede">
-      Room TBA, the campus map. Gawa ng isko't iska.
-    </p>
-    <p class="hero-sub">
-      Plus food, housing, grades, and a campus directory, all built and run by
-      UPLB students. No accounts, no tracking, code on GitHub.
-    </p>
-    <div class="hero-actions">
-      <a
-        href="https://room-tba.uplb.tools"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-primary"
-      >
-        Open Room TBA
-        <OpensInNewTab />
-      </a>
-      <a href="#tools" class="btn btn-secondary">See all tools</a>
-    </div>
-  </div>
 </section>
 
 <style>
   .hero-section {
     position: relative;
-    /* Clears the overlaid transparent header. */
-    padding: calc(var(--header-height, 3.5rem) + 3rem) 0 3.5rem;
-    border-bottom: 1px solid var(--border-card);
+    isolation: isolate;
+    /* Clears the transparent header that floats over this photo. */
+    padding: calc(var(--header-height, 3.5rem) + 3.5rem) 0 4rem;
     overflow: hidden;
+    background: hsl(5 40% 10%);
   }
 
   .hero-photo {
@@ -60,19 +68,33 @@ import OpensInNewTab from "./OpensInNewTab.astro";
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 38%;
+    object-position: center 55%;
+    z-index: -2;
   }
 
-  .hero-shade {
+  .hero-veil {
     position: absolute;
     inset: 0;
-    /* Heavier scrim: the source photo has a blown-bright sky that washed
-       out white text at the lighter values. */
+    z-index: -1;
+  }
+
+  .hero-veil--vertical {
     background: linear-gradient(
       180deg,
-      rgba(30, 8, 6, 0.55) 0%,
-      rgba(30, 8, 6, 0.52) 55%,
-      rgba(46, 10, 8, 0.78) 100%
+      hsl(5 45% 8% / 0.78) 0%,
+      hsl(5 45% 8% / 0.42) 28%,
+      hsl(5 45% 8% / 0.38) 65%,
+      hsl(5 45% 8% / 0.72) 100%
+    );
+  }
+
+  .hero-veil--reading {
+    background: linear-gradient(
+      100deg,
+      hsl(5 45% 7% / 0.88) 0%,
+      hsl(5 45% 7% / 0.8) 34%,
+      hsl(5 45% 7% / 0.42) 62%,
+      hsl(5 45% 7% / 0.06) 100%
     );
   }
 
@@ -80,51 +102,36 @@ import OpensInNewTab from "./OpensInNewTab.astro";
     position: relative;
   }
 
-  .hero-credit {
-    position: absolute;
-    right: 0.75rem;
-    bottom: 0.5rem;
-    z-index: 1;
-    font-size: 0.6875rem;
-    color: rgba(255, 255, 255, 0.75);
-    text-decoration: none;
-  }
-
-  .hero-credit:hover {
-    color: #fff;
-    text-decoration: underline;
-  }
-
-  .hero-container {
+  .hero-copy {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    max-width: 38rem;
   }
 
   .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2rem, 5.5vw, 3.25rem);
     line-height: 1.05;
     font-weight: 800;
     color: #fff;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
     text-wrap: balance;
   }
 
   .hero-lede {
     font-size: clamp(1.125rem, 2.5vw, 1.375rem);
     line-height: 1.4;
-    color: #ffd9a0;
+    /* Warm cream, not saturated gold: gold on a golden sky was the worst
+       offender in the first pass. */
+    color: hsl(35 100% 92%);
     font-weight: 600;
-    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.5);
     text-wrap: balance;
   }
 
   .hero-sub {
     font-size: 1rem;
-    max-width: 36rem;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+    max-width: 34rem;
+    color: hsl(0 0% 100% / 0.94);
   }
 
   .hero-actions {
@@ -134,22 +141,35 @@ import OpensInNewTab from "./OpensInNewTab.astro";
     margin-top: 0.75rem;
   }
 
-  /* The default secondary button is ink-on-light and disappears on the
-     photo; outline it in white inside the hero only. */
   .hero-actions :global(.btn-secondary) {
     color: #fff;
-    border-color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.08);
+    border-color: hsl(0 0% 100% / 0.75);
+    background: hsl(0 0% 100% / 0.1);
+    backdrop-filter: blur(2px);
   }
 
   .hero-actions :global(.btn-secondary:hover) {
-    background: rgba(255, 255, 255, 0.18);
+    background: hsl(0 0% 100% / 0.2);
     border-color: #fff;
   }
 
-  @media (min-width: 768px) {
+  .hero-credit {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.5rem;
+    font-size: 0.6875rem;
+    color: hsl(0 0% 100% / 0.72);
+    text-decoration: none;
+  }
+
+  .hero-credit:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  @media (min-width: 62rem) {
     .hero-section {
-      padding: 4.5rem 0 3.5rem;
+      padding: calc(var(--header-height, 3.5rem) + 5rem) 0 5.5rem;
     }
   }
 </style>
