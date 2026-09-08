@@ -7,6 +7,7 @@ const [flagship, ...peers] = tools;
 <section id="tools" class="section tools-section" aria-labelledby="tools-heading">
   <div class="container">
     <div class="tools-header">
+      <span class="section-eyebrow">Built for UPLB</span>
       <h2 id="tools-heading" class="section-title">The tools</h2>
       <p class="section-subtitle">
         Start with the map. Everything else is a peer project by students, for
@@ -143,7 +144,7 @@ const [flagship, ...peers] = tools;
 
 <style>
   .tools-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.25rem;
   }
 
   .tool-tags {
@@ -168,10 +169,17 @@ const [flagship, ...peers] = tools;
     margin-bottom: 1rem;
   }
 
+  /* The tint is a placeholder, not decoration: these screenshots are lazy, so
+     without it the card is a white void until the image lands. */
   .flagship__preview {
     display: block;
     border-bottom: 1px solid var(--border-card);
-    background: var(--bg-elevated);
+    background: linear-gradient(
+      160deg,
+      hsl(5 25% 95%) 0%,
+      hsl(5 18% 97%) 100%
+    );
+    box-shadow: inset 0 -1px 0 hsl(5 30% 88% / 0.9);
   }
 
   .flagship__preview img {
@@ -212,7 +220,7 @@ const [flagship, ...peers] = tools;
     gap: 0.1rem;
     padding: 0.75rem 0.5rem;
     border-radius: var(--radius-sm);
-    background: var(--bg-elevated);
+    background: var(--bg-page);
     border: 1px solid var(--border-card);
   }
 
@@ -256,12 +264,17 @@ const [flagship, ...peers] = tools;
   .peer__preview {
     display: block;
     margin: -1.25rem -1.25rem 0.4rem;
-    border-bottom: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+    border-bottom: 1px solid var(--border-card);
     border-radius: inherit;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     overflow: hidden;
     aspect-ratio: 16 / 10;
+    background: linear-gradient(
+      160deg,
+      hsl(5 25% 95%) 0%,
+      hsl(5 18% 97%) 100%
+    );
   }
 
   .peer__preview img {

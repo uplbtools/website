@@ -21,6 +21,7 @@ try {
   <div class="container">
     <div class="contributors-header">
       <div>
+        <span class="section-eyebrow">The people</span>
         <h2 id="contributors-heading" class="section-title">Top contributors</h2>
         <p class="section-subtitle">
           Commits across public uplbtools repositories on GitHub. Bots are
@@ -133,7 +134,7 @@ try {
 
   .contributor-card:hover {
     border-color: var(--brand-maroon-line);
-    background: var(--bg-elevated);
+    background: var(--brand-maroon-tint);
   }
 
   .contributor-card__avatar {
@@ -141,8 +142,15 @@ try {
     height: 3.5rem;
     border-radius: var(--radius-pill);
     object-fit: cover;
-    border: 2px solid var(--border-card);
-    margin-bottom: 0.3rem;
+    border: 2px solid var(--bg-elevated);
+    /* Ring plus a soft drop, so the avatar sits on the card rather than
+       being punched into it. The tint also stands in while the image is
+       still lazy-loading, instead of an empty outline. */
+    box-shadow:
+      0 0 0 1px var(--border-card),
+      var(--shadow-sm);
+    background: var(--bg-page);
+    margin-bottom: 0.45rem;
   }
 
   .contributor-card__name {

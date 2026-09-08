@@ -30,9 +30,19 @@
   --font-display: "Raleway", var(--font-sans);
 
   --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.125rem;
   --radius-pill: 999px;
+
+  /* Shadows are tinted with the brand maroon rather than neutral black. On a
+     warm page a grey shadow reads as dirt; a warm one reads as depth. Two
+     layers each: a tight contact shadow plus a wide soft one. */
+  --shadow-sm:
+    0 1px 2px hsl(5 35% 18% / 0.06), 0 2px 6px hsl(5 35% 18% / 0.05);
+  --shadow-md:
+    0 2px 4px hsl(5 35% 18% / 0.06), 0 10px 24px hsl(5 35% 18% / 0.08);
+  --shadow-lg:
+    0 4px 10px hsl(5 35% 18% / 0.07), 0 20px 44px hsl(5 35% 18% / 0.11);
 
   --measure: 42rem;
   --transition-fast: 0.15s ease;
@@ -114,7 +124,7 @@ body {
 }
 
 .section {
-  padding: 3rem 0;
+  padding: 3.75rem 0;
 }
 
 h1,
@@ -163,10 +173,18 @@ input:focus-visible {
 .btn-primary {
   background: var(--brand-maroon);
   color: var(--text-on-maroon);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
   background: var(--brand-maroon-deep);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary {
@@ -185,10 +203,22 @@ input:focus-visible {
   font-size: 0.875rem;
 }
 
+/* Cards sit on white with a soft shadow instead of a near-page-coloured fill.
+   The old 2% lightness gap between card and page did not read as a card at
+   all; the lift does the separating now and the border just crisps the edge. */
 .card {
-  background-color: var(--bg-card);
+  background-color: var(--bg-elevated);
   border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .badge {
@@ -198,7 +228,7 @@ input:focus-visible {
   font-size: 0.75rem;
   font-weight: 600;
   border-radius: var(--radius-pill);
-  background-color: var(--bg-elevated);
+  background-color: var(--bg-page);
   border: 1px solid var(--border-card);
   color: var(--text-muted);
 }
@@ -215,17 +245,34 @@ input:focus-visible {
   color: var(--brand-green);
 }
 
+/* Small caps label above a section heading. Gives the eye a rung to land on
+   before the heading and separates sections without drawing a rule. */
+.section-eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-maroon);
+}
+
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.15;
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   margin-bottom: 0.5rem;
+  text-wrap: balance;
 }
 
 .section-subtitle {
-  font-size: 1rem;
-  color: var(--text-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-muted);
   max-width: var(--measure);
+  text-wrap: pretty;
 }
 
 .text-link {
@@ -239,8 +286,14 @@ input:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn {
+  .btn,
+  .card {
     transition: none;
+  }
+
+  .card:hover,
+  .btn-primary:hover {
+    transform: none;
   }
 }
 
@@ -250,6 +303,6 @@ input:focus-visible {
   }
 
   .section {
-    padding: 4rem 0;
+    padding: 5.5rem 0;
   }
 }

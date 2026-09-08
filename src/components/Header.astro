@@ -10,20 +10,16 @@ const { overlay = false } = Astro.props;
 <header class:list={["main-header", { "main-header--overlay": overlay }]}>
   <div class="container header-container">
     <a href="/" class="logo" aria-label="uplb.tools home">
-      <svg
-        class="logo-mark"
-        viewBox="0 0 32 32"
-        width="28"
-        height="28"
+      <img
+        src="/icon.png"
+        alt=""
+        width="52"
+        height="52"
+        class="logo-icon"
+        decoding="async"
+        fetchpriority="high"
         aria-hidden="true"
-        focusable="false"
-      >
-        <rect width="32" height="32" rx="9" class="logo-mark__tile" />
-        <path
-          class="logo-mark__pin"
-          d="M16 7.5c-3.6 0-6.5 2.9-6.5 6.4 0 4.7 5.7 10 6 10.2a.8.8 0 0 0 1 0c.3-.2 6-5.5 6-10.2 0-3.5-2.9-6.4-6.5-6.4Zm0 8.9a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
-        />
-      </svg>
+      />
       <span class="logo-word">uplb<span class="logo-dot">.</span>tools</span>
     </a>
 
@@ -126,28 +122,22 @@ const { overlay = false } = Astro.props;
     color: hsl(35 100% 82%);
   }
 
-  /* Mark is a map pin, not a generic toolbox: every tool here starts at
-     the campus map. Inline SVG so it stays sharp and recolors with the
-     header (maroon tile on light, white-on-transparent over the photo). */
-  .logo-mark {
-    width: 1.75rem;
-    height: 1.75rem;
+  /* The toolbox is the org's mark. Served at 2x the rendered box so it stays
+     crisp, and given a drop-shadow rather than a box-shadow because the PNG
+     is transparent around the lid. */
+  .logo-icon {
+    width: 1.625rem;
+    height: 1.625rem;
+    object-fit: contain;
     flex-shrink: 0;
     display: block;
+    filter: drop-shadow(0 1px 1px hsl(5 40% 20% / 0.18));
   }
 
-  .logo-mark__tile {
-    fill: var(--brand-maroon);
-  }
-
-  .logo-mark__pin {
-    fill: #fff;
-  }
-
-  .main-header--overlay .logo-mark__tile {
-    fill: hsl(0 0% 100% / 0.16);
-    stroke: hsl(0 0% 100% / 0.5);
-    stroke-width: 1;
+  /* Over the hero photo the maroon toolbox loses its edges, so lift it off
+     the picture instead of recolouring it. */
+  .main-header--overlay .logo-icon {
+    filter: drop-shadow(0 1px 6px hsl(0 0% 0% / 0.55));
   }
 
   .header-nav {
