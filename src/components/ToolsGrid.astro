@@ -84,6 +84,21 @@ const [flagship, ...peers] = tools;
       {
         peers.map((tool) => (
           <li class="peer card">
+            <a
+              href={tool.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="peer__preview"
+              aria-label={`Open ${tool.name}`}
+            >
+              <img
+                src={tool.screenshot}
+                alt={tool.screenshotAlt}
+                loading="lazy"
+                width="640"
+                height="400"
+              />
+            </a>
             <div class="tool-tags" aria-label="Categories">
               {tool.tags.map((tag) => (
                 <span class="badge">{tag}</span>
@@ -236,6 +251,25 @@ const [flagship, ...peers] = tools;
     flex-direction: column;
     gap: 0.6rem;
     padding: 1.25rem;
+  }
+
+  .peer__preview {
+    display: block;
+    margin: -1.25rem -1.25rem 0.4rem;
+    border-bottom: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+    border-radius: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+
+  .peer__preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
   }
 
   .peer__title {
