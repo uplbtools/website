@@ -1,7 +1,13 @@
 ---
 import OpensInNewTab from "./OpensInNewTab.astro";
+
+interface Props {
+  /** Transparent header floated over the hero photo (home page). */
+  overlay?: boolean;
+}
+const { overlay = false } = Astro.props;
 ---
-<header class="main-header">
+<header class:list={["main-header", { "main-header--overlay": overlay }]}>
   <div class="container header-container">
     <a href="/" class="logo" aria-label="uplb.tools home">
       <img
@@ -51,6 +57,38 @@ import OpensInNewTab from "./OpensInNewTab.astro";
     background-color: hsl(5 22% 96% / 0.92);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-card);
+  }
+
+  /* Home page: the hero photo runs under the header, so the bar goes
+     transparent and its text flips to white. Not sticky, the photo owns
+     the top of the page. */
+  .main-header--overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
+  }
+
+  .main-header--overlay .logo-word,
+  .main-header--overlay .header-nav__link {
+    color: #fff;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+  }
+
+  .main-header--overlay .logo-dot {
+    color: #ffd9a0;
+  }
+
+  .main-header--overlay :global(.btn-secondary) {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .main-header--overlay .header-github-icon {
+    filter: invert(1);
   }
 
   .header-container {
