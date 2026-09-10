@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import TeamCard from "../components/TeamCard.astro";
 import RepoContributors from "../components/RepoContributors.astro";
 import NamedContributors from "../components/NamedContributors.astro";
-import { coreTeam, designCredits } from "../data/press";
+import { coreTeam, designCredits, toolBuilders } from "../data/press";
 ---
 
 <Layout
@@ -31,6 +31,17 @@ import { coreTeam, designCredits } from "../data/press";
           {coreTeam.map((member) => <TeamCard member={member} />)}
         </ul>
       </section>
+
+      {
+        toolBuilders.map((person) => (
+          <section class="people-section" aria-labelledby={`tool-${person.tool.toLowerCase()}-heading`}>
+            <h2 id={`tool-${person.tool.toLowerCase()}-heading`}>{person.tool}</h2>
+            <ul class="team-grid">
+              <TeamCard member={person} />
+            </ul>
+          </section>
+        ))
+      }
 
       <section class="people-section" aria-labelledby="design-heading">
         <h2 id="design-heading">Design</h2>
@@ -68,8 +79,9 @@ import { coreTeam, designCredits } from "../data/press";
             Whoever asked you to do the work adds your name when it's done.
           </li>
           <li>
-            Anyone who has done design work across more than one release or project
-            is listed under Design.
+            Anyone who built one of the other uplb.tools apps is listed under that
+            app. Anyone who has done design work across more than one release or
+            project is listed under Design.
           </li>
           <li>
             The core team is the people who kept working across more than one

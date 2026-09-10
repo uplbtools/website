@@ -106,6 +106,22 @@ export const designCredits: CoreMember[] = [
   },
 ];
 
+/**
+ * People who built one of the other uplb.tools apps. Listed under their app
+ * rather than under Room TBA core, since that is what they made.
+ */
+export const toolBuilders: (CoreMember & { tool: string })[] = [
+  {
+    tool: "UPPETITE",
+    name: "Aedrian Ponce",
+    role: "Built and maintains UPPETITE.",
+    bio: "Aedrian built UPPETITE, the break-time food finder for Elbi. You pick where you are, where your next class is, and how long you have, and it shows only the food stops that fit the walk. He has also contributed to Room TBA.",
+    github: "Diannn3",
+    linkedin: "https://www.linkedin.com/in/aedrian-ponce-a602b0398/",
+    facebook: "https://www.facebook.com/aedrian.ponce",
+  },
+];
+
 export type NamedContributor = {
   name: string;
   /** What they did, in plain words. */
