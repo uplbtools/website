@@ -1,80 +1,43 @@
 # Press and features
 
-How we handle it when a publication, an org, or a school office wants to write about uplb.tools or one of us. Written after the Iskolar ng Bayan feature in September 2026, when we found out we had no process and the credits came out wrong.
+Notes on how we deal with press. Written after the Iskolar ng Bayan feature in September 2026 because we didn't have any of this written down.
 
-Public repo, but this doc is for the team.
+## When someone wants to write about us
 
-## Who does what
+Whoever got contacted handles it. Post in the GC the same day so the rest of us know.
 
-- **Simeon** handles publicity. Outlets go to him first.
-- **Simonee** does interviews and quotes about Room TBA.
-- Anyone can be the contact for their own org's member spotlight.
+Reply within a day. Say yes, say Room TBA is a team project, and send them uplb.tools/press. Send a group photo and a headshot and let them pick. Ask them to run the credit line from the press kit. Copy it, don't rewrite it.
 
-If you get contacted directly, that's fine. Just post it in the GC the same day so nobody is surprised.
+If they want an interview, send them to whoever built the thing they're writing about.
 
-## When someone reaches out
+The day you submit, post in the GC what you sent. Photos, credit line, quotes. Don't wait for the article to come out.
 
-Reply within a day, even if it's "yes, sending assets by Friday."
+When it's published, share it with everyone's names written out.
 
-First reply says three things:
+If they got a name wrong or dropped the credit line, ask them to fix it that day. Send the exact text you want.
 
-1. Yes, happy to.
-2. Room TBA is built by a team. We'll send a group photo and a headshot, use whichever fits. Please run the credit line.
-3. The press kit is at uplb.tools/press.
+## When we announce something
 
-Copy the credit line from the press kit as is. Don't retype it. Don't pick names.
+We send a release for a launch, a new campus fork, a partnership, or a milestone with a real number behind it. Not for point releases.
 
-Send both photos every time, group first. Editors choose. We ask once and don't argue the layout.
+Whoever did the work writes it. Two other core members read it before it goes out. Post the full text in the GC at least a day before. Anyone named in it can change how they're described.
 
-## Before it publishes
+The release should have one sentence on what shipped, one number with its source (same number as the press kit), the names of the people who did this specific work, a quote from whoever led it, a link to the thing, and the credit line at the end.
 
-Post in the GC what you sent, meaning which photos, the credit line, and any quotes. Do this the day you submit, not the day it comes out.
+Post it to the org Facebook and Instagram, the GitHub release, Discord, and the changelog. Same text in every channel.
 
-This is the rule that would have prevented the September thing. Nobody should learn what an article looks like by reading the article.
+Nobody posts as UPLB Tools without the GC seeing it first.
 
-## When it's out
-
-Share it from the org accounts and your own with the names written out and tagged. Not "and the team."
-
-If they cut the credit line or got a name wrong, ask for a correction the same day. Be polite, be specific, send the exact text. Most outlets fix it.
-
-## Press releases (we announce something)
-
-A press release is us telling people something shipped. It is different from a feature because nobody is editing us, so every name and number in it is our fault.
-
-**When we send one.** A launch, a new campus fork, a partnership, or a milestone with a real number behind it. Not point releases. If you have to ask whether it's big enough, it isn't.
-
-**Who writes it.** Whoever led the thing writes the first draft. Simeon edits. One other core member reads it and says yes. Three people, none of them the same person twice.
-
-**Before it goes out.** Post the full text in the GC at least a day before. Anyone named in it gets to change how they're described. This is not optional and it is not a formality.
-
-**What's in it.**
-
-- What shipped, in one sentence a freshman would understand.
-- One number, with where it came from. Same numbers as the press kit. If the press kit doesn't have it, verify it first and add it there.
-- Who built this specific thing, named in the body, before the general credit line. The people who did the work on this release come first, whoever they are.
-- A quote from whoever led it. Not automatically Simonee.
-- Link to the thing, link to uplb.tools/press.
-- The credit line, verbatim, at the bottom.
-
-**Where it goes.** Org Facebook and Instagram, the GitHub release, Discord, and the changelog. Then the outlet list Simeon keeps. Same text everywhere, so the credits can't drift between channels.
-
-**Nobody sends anything as UPLB Tools alone.** Not from the org accounts, not to an outlet. The GC window is the whole point.
-
-**If we got it wrong.** Correct it in every channel it went to, same day, same wording. Don't quietly edit one post.
+If something in it was wrong, fix it in every channel it went to.
 
 ## Org member spotlights
 
-If your org features you for work on Room TBA, that's your feature. You're the face. Say so in the GC before it runs, plug the repo, done. Nobody expects a group photo in a member spotlight.
+If your org features you for Room TBA work, that's your feature. Tell the GC before it runs and link the repo.
 
 ## Credits
 
-Who is on uplb.tools/people, and how you get there, is written on the page itself. If a publication's credit doesn't match the page, the page is right and we ask for a fix. If the page is wrong, fix the page.
+The rule for who's on uplb.tools/people is on that page. If a publication's credit doesn't match, we ask them to fix it. If the page is wrong, we fix the page.
 
-## What we don't do
+## Don'ts
 
-- Negotiate layout past the first ask.
-- Promise a group photo will run. We promise we asked.
-- Submit anyone's photo without asking them.
-- Decide credits on the spot. The credit line already exists.
-- Add someone to the core team the week a feature drops.
+Don't argue with an editor about layout after the first ask. Don't tell anyone the group photo will definitely run. Don't submit someone's photo without asking them. Don't add anyone to the core team the same week a feature drops.
