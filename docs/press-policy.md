@@ -20,7 +20,7 @@ First reply says three things:
 
 1. Yes, happy to.
 2. Room TBA is built by a team. We'll send a group photo and a headshot, use whichever fits. Please run the credit line.
-3. Here's the press kit: uplb.tools/press
+3. The press kit is at uplb.tools/press.
 
 Copy the credit line from the press kit as is. Don't retype it. Don't pick names.
 
@@ -28,7 +28,7 @@ Send both photos every time, group first. Editors choose. We ask once and don't 
 
 ## Before it publishes
 
-Post in the GC what you sent: which photos, the credit line, any quotes. Do this the day you submit, not the day it comes out.
+Post in the GC what you sent, meaning which photos, the credit line, and any quotes. Do this the day you submit, not the day it comes out.
 
 This is the rule that would have prevented the September thing. Nobody should learn what an article looks like by reading the article.
 
@@ -40,7 +40,7 @@ If they cut the credit line or got a name wrong, ask for a correction the same d
 
 ## Press releases (we announce something)
 
-A press release is us telling people something shipped. Different from a feature: nobody is editing us, so every name and number in it is our fault.
+A press release is us telling people something shipped. It is different from a feature because nobody is editing us, so every name and number in it is our fault.
 
 **When we send one.** A launch, a new campus fork, a partnership, or a milestone with a real number behind it. Not point releases. If you have to ask whether it's big enough, it isn't.
 
