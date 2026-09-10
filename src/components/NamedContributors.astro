@@ -1,0 +1,60 @@
+---
+import { namedContributors } from "../data/press";
+import OpensInNewTab from "./OpensInNewTab.astro";
+---
+
+<ul class="named-list">
+  {
+    namedContributors.map((person) => {
+      const href = person.website ?? person.facebook;
+      return (
+        <li>
+          {href ? (
+            <a class="named-list__name" href={href} target="_blank" rel="noopener noreferrer">
+              {person.name}
+              <OpensInNewTab />
+            </a>
+          ) : (
+            <span class="named-list__name">{person.name}</span>
+          )}
+          <span class="named-list__role">{person.role}</span>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .named-list {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  }
+
+  .named-list li {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-card);
+  }
+
+  .named-list__name {
+    font-weight: 600;
+    color: var(--text-ink);
+  }
+
+  a.named-list__name {
+    color: var(--brand-maroon);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .named-list__role {
+    color: var(--text-muted);
+  }
+</style>

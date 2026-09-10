@@ -1,0 +1,107 @@
+---
+import {
+  fetchRepoTopContributors,
+  formatGithubContributions,
+} from "../lib/github-org-contributors";
+import { coreTeam, designCredits } from "../data/press";
+
+interface Props {
+  /** Repository under the uplbtools org. */
+  repo?: string;
+}
+
+const { repo = "room-tba" } = Astro.props;
+
+/**
+ * Pulled from GitHub at build time so the list is never hand-maintained.
+ * Core and design credits are named separately on the pages that use this, so
+ * they are filtered out here rather than listed twice.
+ */
+const namedLogins = new Set(
+  [...coreTeam, ...designCredits]
+    .map((member) => member.github?.toLowerCase())
+    .filter((login): login is string => Boolean(login)),
+);
+
+let contributors: Awaited<ReturnType<typeof fetchRepoTopContributors>> = [];
+let loadError: string | null = null;
+
+try {
+  const all = await fetchRepoTopContributors(repo, 60);
+  contributors = all.filter(
+    (person) => !namedLogins.has(person.login.toLowerCase()),
+  );
+  // The GitHub helper turns a failed request into an empty array, and an
+  // unauthenticated build hits the 60/hour rate limit easily. Silently
+  // shipping an empty credit list is the one failure these pages must not
+  // have, so treat "no rows at all" as an error rather than as a real answer.
+  if (all.length === 0) {
+    loadError =
+      "Could not load contributors from GitHub during the last build. Ask us for the current list.";
+  }
+} catch {
+  loadError =
+    "Could not load contributors from GitHub during the last build. Ask us for the current list.";
+}
+---
+
+{
+  loadError ? (
+    <p class="contributor-list__error" role="alert">{loadError}</p>
+  ) : (
+    <ul class="contributor-list">
+      {contributors.map((person) => (
+        <li>
+          <a
+            class="contributor-list__name"
+            href={person.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {person.name ?? person.login}
+          </a>
+          <span class="contributor-list__count">
+            {formatGithubContributions(person.contributions)}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .contributor-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  }
+
+  .contributor-list li {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-card);
+  }
+
+  .contributor-list__name {
+    font-weight: 600;
+    color: var(--brand-maroon);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .contributor-list__count {
+    color: var(--text-muted);
+  }
+
+  .contributor-list__error {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+</style>

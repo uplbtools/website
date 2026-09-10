@@ -247,15 +247,6 @@ input:focus-visible {
 
 /* Small caps label above a section heading. Gives the eye a rung to land on
    before the heading and separates sections without drawing a rule. */
-.section-eyebrow {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand-maroon);
-}
 
 .section-title {
   font-family: var(--font-display);
@@ -305,4 +296,14 @@ input:focus-visible {
   .section {
     padding: 5.5rem 0;
   }
+}
+
+/* Shared by /people and /press, which render the same roster from src/data/press.ts. */
+.team-grid {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.875rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 }
