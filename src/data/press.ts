@@ -49,14 +49,14 @@ export const coreTeam: CoreMember[] = [
   {
     name: "Simonee Ezekiel Mariquit",
     role: "Founder and lead. App architecture, campus data pipeline, releases.",
-    bio: "Started Room TBA in January 2026 and remains its largest contributor. Works on the app architecture, the campus data pipeline that imports class schedules each term, and the release process. Also maintains Elbi GradeSim and runs Pizza & Friends.",
+    bio: "Simonee started Room TBA in January 2026 and is still its largest contributor. He works on the app architecture, the campus data pipeline that imports class schedules each term, and the release process. He also maintains Elbi GradeSim and runs Pizza & Friends.",
     github: "smmariquit",
     website: "https://stimmie.dev",
   },
   {
     name: "Ken Ramiscal",
     role: "Offline support, map, interface.",
-    bio: "Built the offline support that keeps Room TBA usable when campus signal drops, and works across the map and the interface. Second-largest contributor to the project. Web designer and frontend developer at UPLB.",
+    bio: "Ken built the offline support that keeps Room TBA usable when campus signal drops, and he works across the map and the interface. He is the second-largest contributor to the project and a web designer and frontend developer at UPLB.",
     github: "Kenramiscal1106",
     website: "https://kendan.dev",
     linkedin: "https://www.linkedin.com/in/ken-daniele-ramiscal-1684b3376/",
@@ -64,14 +64,14 @@ export const coreTeam: CoreMember[] = [
   {
     name: "Eunice Almeyda",
     role: "Directions, map chrome, mobile interface.",
-    bio: "Built the multi-modal directions feature and much of the mobile map interface, including the bottom sheet and search overlay students use on their phones. Also designed the Room TBA logo.",
+    bio: "Eunice built the directions feature and much of the mobile map interface, including the bottom sheet and the search overlay students use on their phones. She also designed the Room TBA logo.",
     github: "unisA02",
     linkedin: "https://www.linkedin.com/in/eunice-almeyda-6a254a351/",
   },
   {
     name: "Simeon Ricalde",
     role: "Publicity and outreach.",
-    bio: "Handles publicity and outreach for Room TBA, including press and campus communications. Student at UPLB and a member of the UPLB Mathematical Sciences Society.",
+    bio: "Simeon handles publicity and outreach for Room TBA, including press and campus communications. He is a student at UPLB and a member of the UPLB Mathematical Sciences Society.",
     github: "meonnn",
     website: "https://meonnn.github.io/",
     linkedin: "https://www.linkedin.com/in/simeon-ricalde-218084380/",
@@ -79,7 +79,7 @@ export const coreTeam: CoreMember[] = [
   {
     name: "Kalinaw Lukas Aom Bebis",
     role: "Interface, map, bug fixes.",
-    bio: "Works on the Room TBA interface and map, and on the bug fixes that keep each term's release stable. Fullstack developer and BS Computer Science undergraduate at UPLB.",
+    bio: "Lukas works on the Room TBA interface and map, and on the bug fixes that keep each term's release stable. He is a fullstack developer and a BS Computer Science undergraduate at UPLB.",
     github: "klnwlks",
     website: "https://lukasbebis.com",
     linkedin: "https://www.linkedin.com/in/lukas-bebis/",
@@ -95,12 +95,12 @@ export const designCredits: CoreMember[] = [
   {
     name: "Mary Gwyneth Telmosa",
     role: "Interface design.",
-    bio: "Interface design on Room TBA.",
+    bio: "Gwy did interface design on Room TBA.",
   },
   {
     name: "Rovic Villaralvo",
     role: "Design.",
-    bio: "Product designer responsible for a large share of the design work across Room TBA and the uplb.tools projects. Works on product design and design systems, with client case studies including MyNaga and Agently.",
+    bio: "Rovic is a product designer and did a large share of the design work across Room TBA and the other uplb.tools projects. His client work includes MyNaga and Agently.",
     linkedin: "https://www.linkedin.com/in/rovic-villaralvo/",
     website: "https://rovicdesign.framer.website/",
   },
@@ -139,11 +139,11 @@ export const namedContributors: NamedContributor[] = [
 
 /** Short version. Fits a caption or a lede. */
 export const boilerplateShort =
-  "uplb.tools is a student-led open-source collective at UP Los Baños. Its flagship tool, Room TBA, is a campus map that answers the question every student asks during enlistment: where is this room?";
+  "uplb.tools is a student-led open-source collective at UP Los Baños. Its main tool, Room TBA, is a campus map that tells you where a room is, which is the question every student asks during enlistment.";
 
 /** Long version. Fits an "about the project" paragraph at the end of a piece. */
 export const boilerplateLong =
-  "uplb.tools is an independent, student-led open-source collective at the University of the Philippines Los Baños, not affiliated with or endorsed by the UPLB administration. It maintains Room TBA, an interactive campus map with room search, class schedules, a planner, and jeepney routes that keeps working offline; Elbi GradeSim, a browser extension for GWA simulation; and several smaller campus tools. Everything is MIT-licensed on GitHub, and the campus map data is published as open data under CC-BY 4.0. Room TBA has been forked for UP Visayas, UP Baguio, and Bulacan State University.";
+  "uplb.tools is an independent, student-led open-source collective at the University of the Philippines Los Baños, not affiliated with or endorsed by the UPLB administration. It maintains Room TBA, a campus map with room search, class schedules, a planner, and jeepney routes that keeps working offline. It also maintains Elbi GradeSim, a browser extension for GWA simulation, and several smaller campus tools. Everything is MIT-licensed on GitHub, and the campus map data is published as open data under CC-BY 4.0. Room TBA has been forked for UP Visayas, UP Baguio, and Bulacan State University.";
 
 /**
  * The credit line. Send this with every submission and it removes the question
