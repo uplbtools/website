@@ -8,7 +8,7 @@ The day you submit, post in the GC what you sent. Photos, credit line, quotes. D
 
 When we announce something ourselves, we send a release for a launch, a new campus fork, a partnership, or a milestone with a real number behind it. Not for point releases. Whoever did the work writes it. Two other core members read it before it goes out. Post the full text in the GC at least a day before, and anyone named in it can change how they're described. The release should have one sentence on what shipped, one number with its source (same number as the press kit), the names of the people who did this specific work, a quote from whoever led it, a link to the thing, and the credit line at the end. Post it to the org Facebook and Instagram, the GitHub release, Discord, and the changelog, same text in every channel. Nobody posts as UPLB Tools without the GC seeing it first. If something in it was wrong, fix it in every channel it went to.
 
-If your org features you for Room TBA work, that's your feature. Tell the GC before it runs and link the repo.
+If your org features you for your Room TBA work, that's your feature and none of this applies. Link the repo if you can.
 
 The rule for who's on uplb.tools/people is on that page. If a publication's credit doesn't match, we ask them to fix it. If the page is wrong, we fix the page.
 
