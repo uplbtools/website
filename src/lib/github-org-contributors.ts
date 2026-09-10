@@ -100,7 +100,9 @@ async function listOrgRepos(): Promise<string[]> {
   }
 
   return repos
-    .filter((repo) => !repo.archived && !repo.fork && !EXCLUDED_REPOS.has(repo.name))
+    .filter(
+      (repo) => !repo.archived && !repo.fork && !EXCLUDED_REPOS.has(repo.name),
+    )
     .map((repo) => repo.name);
 }
 
@@ -162,10 +164,39 @@ export async function fetchOrgTopContributors(
     }
   }
 
-  const ranked = [...totals.values()].sort(
-    (a, b) => b.contributions - a.contributions,
-  );
-  const top = ranked.slice(0, limit);
+  return rankAndName([...totals.values()], limit);
+}
+
+/** Contributors to one repo, ranked by commits. Same shape as the org list. */
+export async function fetchRepoTopContributors(
+  repo: string,
+  limit = 24,
+): Promise<OrgContributor[]> {
+  const rows = await listRepoContributors(repo);
+  const people = rows
+    .filter(
+      (row) => row.type === "User" && isVisibleGithubContributor(row.login),
+    )
+    .map((row) => ({
+      login: row.login,
+      avatarUrl: row.avatar_url,
+      profileUrl: row.html_url,
+      contributions: row.contributions,
+    }));
+  return rankAndName(people, limit);
+}
+
+/**
+ * Sort by commits, take the top slice, then fill in display names. Names come
+ * from a per-user request, so this deliberately runs after the slice.
+ */
+async function rankAndName(
+  people: Omit<OrgContributor, "name">[],
+  limit: number,
+): Promise<OrgContributor[]> {
+  const top = [...people]
+    .sort((a, b) => b.contributions - a.contributions)
+    .slice(0, limit);
 
   const names = await Promise.all(
     top.map(async (person) => ({

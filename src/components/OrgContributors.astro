@@ -21,23 +21,25 @@ try {
   <div class="container">
     <div class="contributors-header">
       <div>
-        <span class="section-eyebrow">The people</span>
         <h2 id="contributors-heading" class="section-title">Top contributors</h2>
         <p class="section-subtitle">
           Commits across public uplbtools repositories on GitHub. Bots are
           filtered out.
         </p>
       </div>
-      <a
-        href="https://github.com/uplbtools"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-secondary"
-        aria-label="View uplbtools organization on GitHub"
-      >
-        View org on GitHub
-        <OpensInNewTab />
-      </a>
+      <div class="contributors-actions">
+        <a href="/people" class="btn btn-primary">Meet the team</a>
+        <a
+          href="https://github.com/uplbtools"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-secondary"
+          aria-label="View uplbtools organization on GitHub"
+        >
+          View org on GitHub
+          <OpensInNewTab />
+        </a>
+      </div>
     </div>
 
     {
@@ -86,10 +88,31 @@ try {
         </ul>
       )
     }
+    <p class="contributors-press">
+      Writing about us? <a href="/press">Press kit</a>: logos, screenshots, boilerplate, and credits.
+    </p>
   </div>
 </section>
 
 <style>
+  .contributors-actions {
+    display: flex;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+  }
+
+  .contributors-press {
+    margin: 2rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .contributors-press a {
+    color: var(--brand-maroon);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   .contributors-section {
     border-bottom: 1px solid var(--border-card);
   }

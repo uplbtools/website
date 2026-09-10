@@ -1,0 +1,186 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import TeamCard from "../components/TeamCard.astro";
+import RepoContributors from "../components/RepoContributors.astro";
+import NamedContributors from "../components/NamedContributors.astro";
+import { coreTeam, designCredits } from "../data/press";
+---
+
+<Layout
+  title="People"
+  description="The students who build Room TBA, Elbi GradeSim, and the rest of uplb.tools, plus everyone who's contributed on GitHub."
+>
+  <Header />
+  <main id="main-content" class="people-main">
+    <div class="container people-container">
+      <a href="/" class="people-back">&larr; Home</a>
+
+      <header class="people-hero">
+        <h1>Sino ang gumawa</h1>
+        <p class="people-lede">
+          uplb.tools is built by UPLB students in their spare time. Everyone
+          below shipped something people use.
+        </p>
+      </header>
+
+      <section class="people-section" aria-labelledby="core-heading">
+        <h2 id="core-heading">Core team</h2>
+        <ul class="team-grid">
+          {coreTeam.map((member) => <TeamCard member={member} />)}
+        </ul>
+      </section>
+
+      <section class="people-section" aria-labelledby="design-heading">
+        <h2 id="design-heading">Design</h2>
+        <ul class="team-grid">
+          {designCredits.map((person) => <TeamCard member={person} />)}
+        </ul>
+      </section>
+
+      <section class="people-section" aria-labelledby="contributors-heading">
+        <h2 id="contributors-heading">Contributors</h2>
+        <NamedContributors />
+        <h3 class="people-subhead">On GitHub</h3>
+        <p class="people-note">
+          Everyone who's landed a commit on Room TBA, straight from GitHub.
+        </p>
+        <RepoContributors />
+      </section>
+
+      <section class="people-section" aria-labelledby="policy-heading">
+        <h2 id="policy-heading">How this page works</h2>
+        <p>
+          Nobody is ranked here. Here's how you get on each list.
+        </p>
+        <ul class="policy-list">
+          <li>
+            <strong>On GitHub.</strong> Automatic. Any merged commit to Room TBA
+            puts you here. No one maintains this list.
+          </li>
+          <li>
+            <strong>Contributors.</strong> Made something for a uplb.tools project
+            that isn't code: a pub, a poster, building data, room directions,
+            testing, a translation. No minimum. Whoever asked you to do it adds
+            your name when it's done.
+          </li>
+          <li>
+            <strong>Design.</strong> Design work across more than one release or
+            project, in any medium.
+          </li>
+          <li>
+            <strong>Core team.</strong> Kept working across more than one release:
+            code, design, data, publicity, ops, anything. The core team looks at
+            this once a semester, never in the same week as a feature.
+          </li>
+        </ul>
+        <p>
+          Your card is yours. Want the bio, links, or photo changed, or the whole
+          thing gone? Ask. We don't link anyone's profile without asking first.
+          Roles say what you work on, not where you rank.
+        </p>
+      </section>
+
+      <section class="people-section" aria-labelledby="join-heading">
+        <h2 id="join-heading">Want your name here?</h2>
+        <p>
+          The good-first-issue queue is open, and you don't need to be a
+          strong programmer to start. Data fixes, room directions, and design
+          feedback all count.
+        </p>
+        <p class="people-links">
+          <a href="https://github.com/uplbtools/room-tba/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">Good first issues</a>
+          <a href="https://discord.uplbtools.me">Discord</a>
+          <a href="/press">Press kit</a>
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .people-main {
+    min-height: 100vh;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+
+  .people-container {
+    max-width: 56rem;
+  }
+
+  .people-back {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .people-back:hover {
+    color: var(--brand-maroon);
+  }
+
+  .people-hero h1 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+  }
+
+  .people-lede {
+    margin: 0 0 3rem;
+    font-size: 0.95rem;
+    max-width: 42rem;
+  }
+
+  .people-section {
+    margin-bottom: 3.5rem;
+  }
+
+  .people-section h2 {
+    font-size: 1.25rem;
+    margin: 0 0 1rem;
+  }
+
+  .people-subhead {
+    font-size: 0.95rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .people-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 1.25rem;
+  }
+
+  .people-section p {
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .policy-list {
+    margin: 0.75rem 0 1rem;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .policy-list li {
+    margin-bottom: 0.5rem;
+    line-height: 1.55;
+  }
+
+  .people-links {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .people-links a {
+    color: var(--brand-maroon);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-size: 0.9rem;
+  }
+</style>

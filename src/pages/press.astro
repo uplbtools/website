@@ -1,0 +1,521 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import OpensInNewTab from "../components/OpensInNewTab.astro";
+import TeamCard from "../components/TeamCard.astro";
+import RepoContributors from "../components/RepoContributors.astro";
+import NamedContributors from "../components/NamedContributors.astro";
+import {
+  boilerplateLong,
+  boilerplateShort,
+  coreTeam,
+  designCredits,
+  creditLine,
+  facts,
+  logos,
+  screenshots,
+} from "../data/press";
+
+---
+
+<Layout
+  title="Press kit"
+  description="Logos, screenshots, boilerplate, team credits, and verified figures for writing about uplb.tools and Room TBA. Free to use, no permission needed."
+>
+  <Header />
+  <main id="main-content" class="press-main">
+    <div class="container press-container">
+      <a href="/" class="press-back">&larr; Home</a>
+
+      <header class="press-hero">
+        <h1>Press kit</h1>
+        <p class="press-lede">
+          Everything you need to write about <strong>uplb.tools</strong> and
+          Room TBA. Copy any of it, no permission needed. If something is
+          missing, ask on{" "}
+          <a href="https://discord.uplbtools.me" target="_blank" rel="noopener noreferrer">Discord<OpensInNewTab /></a>{" "}
+          or open a{" "}
+          <a href="https://github.com/uplbtools/room-tba/discussions" target="_blank" rel="noopener noreferrer">GitHub discussion<OpensInNewTab /></a>.
+        </p>
+      </header>
+
+      <section class="press-section" aria-labelledby="boilerplate-heading">
+        <h2 id="boilerplate-heading">Boilerplate</h2>
+        <p class="press-note">Drop-in description of the project. Two lengths.</p>
+
+        <div class="copyblock card">
+          <div class="copyblock__head">
+            <span class="copyblock__label">Short</span>
+            <button type="button" class="copy-btn" data-copy-target="bp-short">Copy</button>
+          </div>
+          <p id="bp-short">{boilerplateShort}</p>
+        </div>
+
+        <div class="copyblock card">
+          <div class="copyblock__head">
+            <span class="copyblock__label">Long</span>
+            <button type="button" class="copy-btn" data-copy-target="bp-long">Copy</button>
+          </div>
+          <p id="bp-long">{boilerplateLong}</p>
+        </div>
+      </section>
+
+      <section class="press-section" aria-labelledby="credit-heading">
+        <h2 id="credit-heading">Credit line</h2>
+        <p class="press-note">
+          Room TBA is built by a team. We would appreciate this running with the
+          piece, whichever photo you use.
+        </p>
+        <div class="copyblock card copyblock--accent">
+          <div class="copyblock__head">
+            <span class="copyblock__label">Credit</span>
+            <button type="button" class="copy-btn" data-copy-target="credit-line">Copy</button>
+          </div>
+          <p id="credit-line">{creditLine}</p>
+        </div>
+      </section>
+
+      <section class="press-section" aria-labelledby="photos-heading">
+        <h2 id="photos-heading">Photos</h2>
+
+        <div class="lead-photo card">
+          <span class="badge badge-maroon">Preferred lead image</span>
+          <div class="lead-photo__slot" role="img" aria-label="Team photo not yet available">
+            <span>Team photo</span>
+          </div>
+          <p class="press-note">
+            Coming soon. Until then, ask us and we'll send interim assets.
+            Where your layout allows a group shot, we'd rather it ran than a
+            single headshot.
+          </p>
+        </div>
+
+        <h3 class="press-subhead">Core team</h3>
+        <ul class="team-grid">
+          {
+            coreTeam.map((member) => <TeamCard member={member} />)
+          }
+        </ul>
+        <p class="press-note">
+          Headshots are being collected. Ask us for any individual photo you
+          need.
+        </p>
+
+        <h3 class="press-subhead">Design</h3>
+        <ul class="team-grid">
+          {
+            designCredits.map((person) => <TeamCard member={person} />)
+          }
+        </ul>
+
+        <h3 class="press-subhead">Contributors</h3>
+        <NamedContributors />
+        <h3 class="press-subhead">On GitHub</h3>
+        <p class="press-note">
+          Everyone who's landed a commit on Room TBA, straight from GitHub.
+        </p>
+        <RepoContributors />
+      </section>
+
+      <section class="press-section" aria-labelledby="shots-heading">
+        <h2 id="shots-heading">Screenshots</h2>
+        <p class="press-note">Free to use with credit to uplb.tools. Captions are ready to paste.</p>
+        <ul class="shot-list">
+          {
+            screenshots.map((shot) => (
+              <li class="shot card">
+                <img
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                  loading="lazy"
+                />
+                <div class="shot__meta">
+                  <p class="shot__caption">{shot.caption}</p>
+                  <a class="shot__dl" href={shot.src} download>
+                    Download PNG
+                  </a>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="press-section" aria-labelledby="logos-heading">
+        <h2 id="logos-heading">Logos</h2>
+        <ul class="logo-grid">
+          {
+            logos.map((logo) => (
+              <li class="logo-card card">
+                <img src={logo.src} alt={logo.label} width="64" height="64" loading="lazy" />
+                <p class="logo-card__label">{logo.label}</p>
+                <p class="logo-card__note">{logo.note}</p>
+                <a href={logo.src} download>
+                  Download
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="press-note">
+          Please don't recolor, stretch, or add effects to the mark. On dark
+          backgrounds, leave clear space around it rather than adding a box.
+        </p>
+      </section>
+
+      <section class="press-section" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">Fast facts</h2>
+        <p class="press-note">Verified figures. Please use these rather than estimates.</p>
+        <dl class="facts-grid">
+          {
+            facts.map((fact) => (
+              <div class="fact card">
+                <dt>{fact.value}</dt>
+                <dd>{fact.label}</dd>
+                <p class="fact__source">{fact.source}</p>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section class="press-section" aria-labelledby="interviews-heading">
+        <h2 id="interviews-heading">Interviews</h2>
+        <p>
+          Simonee Ezekiel Mariquit, founder, handles interviews. Reach us on{" "}
+          <a href="https://discord.uplbtools.me" target="_blank" rel="noopener noreferrer">Discord<OpensInNewTab /></a>{" "}
+          or through{" "}
+          <a href="https://github.com/uplbtools/room-tba/discussions" target="_blank" rel="noopener noreferrer">GitHub discussions<OpensInNewTab /></a>.
+        </p>
+        <p>
+          Two small asks. Where your layout allows a group photo, we prefer it
+          over a single headshot. And whichever photo runs, we'd appreciate
+          the credit line above appearing with the piece.
+        </p>
+        <p class="press-note">
+          uplb.tools is independent and student-run. It isn't affiliated with,
+          endorsed by, or speaking for the UPLB administration, and shouldn't
+          be described as an official university tool.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Progressive enhancement: the text is selectable without this.
+  for (const button of document.querySelectorAll<HTMLButtonElement>(".copy-btn")) {
+    button.addEventListener("click", async () => {
+      const target = document.getElementById(button.dataset.copyTarget ?? "");
+      if (!target?.textContent) return;
+      await navigator.clipboard.writeText(target.textContent.trim());
+      const original = button.textContent;
+      button.textContent = "Copied";
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1500);
+    });
+  }
+</script>
+
+<style>
+  .press-main {
+    min-height: 100vh;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+
+  .press-container {
+    max-width: 56rem;
+  }
+
+  .press-back {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .press-back:hover {
+    color: var(--brand-maroon);
+  }
+
+
+  .press-hero h1 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+  }
+
+  .press-lede {
+    margin: 0 0 3rem;
+    font-size: 0.95rem;
+    max-width: 42rem;
+  }
+
+  .press-section {
+    margin-bottom: 3.5rem;
+  }
+
+  .press-section h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .press-subhead {
+    font-size: 0.95rem;
+    margin: 2rem 0 0.75rem;
+  }
+
+  .press-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 1.25rem;
+  }
+
+  .press-section a {
+    color: var(--brand-maroon);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .press-lede a {
+    color: var(--brand-maroon);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .copyblock {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .copyblock--accent {
+    border-color: var(--brand-maroon-line);
+    background: var(--brand-maroon-tint);
+  }
+
+  .copyblock__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .copyblock__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .copyblock p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .copy-btn {
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--brand-maroon-line);
+    background: var(--bg-elevated);
+    color: var(--brand-maroon);
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    background: var(--brand-maroon-tint-strong);
+  }
+
+  .lead-photo {
+    padding: 1.25rem;
+  }
+
+  .lead-photo__slot {
+    margin: 0.875rem 0;
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+    border: 2px dashed var(--border-input);
+    border-radius: var(--radius-md);
+    background: var(--bg-page);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .lead-photo .press-note {
+    margin-bottom: 0;
+  }
+
+  .shot-list,
+  .logo-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .team-card {
+    display: flex;
+    gap: 0.875rem;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .team-card__photo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  .team-card__photo--placeholder {
+    display: grid;
+    place-items: center;
+    background: var(--brand-maroon-tint-strong);
+    color: var(--brand-maroon);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .team-card__name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-ink);
+  }
+
+  .team-card__role {
+    margin: 0.15rem 0 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .team-card__link {
+    font-size: 0.75rem;
+    display: inline-block;
+    margin-top: 0.35rem;
+  }
+
+
+
+
+
+  .shot-list {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .shot {
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid var(--border-card);
+  }
+
+  .shot__meta {
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .shot__caption {
+    margin: 0;
+    font-size: 0.85rem;
+    flex: 1 1 18rem;
+  }
+
+  .shot__dl {
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .logo-grid {
+    display: grid;
+    gap: 0.875rem;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    margin-bottom: 1.25rem;
+  }
+
+  .logo-card {
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .logo-card img {
+    margin: 0 auto 0.75rem;
+    display: block;
+  }
+
+  .logo-card__label {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-ink);
+  }
+
+  .logo-card__note {
+    margin: 0.25rem 0 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .logo-card a {
+    font-size: 0.8rem;
+  }
+
+  .facts-grid {
+    display: grid;
+    gap: 0.875rem;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    margin: 0;
+  }
+
+  .fact {
+    padding: 1.25rem;
+  }
+
+  .fact dt {
+    font-family: "Raleway", system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brand-maroon);
+    line-height: 1.1;
+  }
+
+  .fact dd {
+    margin: 0.35rem 0 0;
+    font-size: 0.8rem;
+    color: var(--text-body);
+  }
+
+  .fact__source {
+    margin: 0.5rem 0 0;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .press-section p {
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+  }
+</style>

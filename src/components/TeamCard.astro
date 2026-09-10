@@ -1,0 +1,139 @@
+---
+import type { CoreMember } from "../data/press";
+import OpensInNewTab from "./OpensInNewTab.astro";
+
+interface Props {
+  member: CoreMember;
+}
+
+const { member } = Astro.props;
+
+/** First letter of the first two words, for the placeholder headshots. */
+function initials(name: string): string {
+  return name
+    .split(" ")
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("");
+}
+---
+
+<li class="team-card card">
+  <div class="team-card__head">
+    {
+      member.headshot ? (
+        <img
+          class="team-card__photo"
+          src={member.headshot}
+          alt={`Headshot of ${member.name}`}
+          width="96"
+          height="96"
+          loading="lazy"
+        />
+      ) : (
+        <span class="team-card__photo team-card__photo--placeholder" aria-hidden="true">
+          {initials(member.name)}
+        </span>
+      )
+    }
+    <div>
+      <p class="team-card__name">{member.name}</p>
+      <p class="team-card__role">{member.role}</p>
+    </div>
+  </div>
+
+  <p class="team-card__bio">{member.bio}</p>
+
+  {
+    (member.github || member.linkedin || member.facebook || member.website) && (
+      <p class="team-card__links">
+        {member.github && (
+          <a href={`https://github.com/${member.github}`} target="_blank" rel="noopener noreferrer">
+            GitHub
+            <OpensInNewTab />
+          </a>
+        )}
+        {member.linkedin && (
+          <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+            <OpensInNewTab />
+          </a>
+        )}
+        {member.facebook && (
+          <a href={member.facebook} target="_blank" rel="noopener noreferrer">
+            Facebook
+            <OpensInNewTab />
+          </a>
+        )}
+        {member.website && (
+          <a href={member.website} target="_blank" rel="noopener noreferrer">
+            Website
+            <OpensInNewTab />
+          </a>
+        )}
+      </p>
+    )
+  }
+</li>
+
+<style>
+  .team-card {
+    padding: 1.125rem;
+  }
+
+  .team-card__head {
+    display: flex;
+    gap: 0.875rem;
+    align-items: center;
+  }
+
+  .team-card__photo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  .team-card__photo--placeholder {
+    display: grid;
+    place-items: center;
+    background: var(--brand-maroon-tint-strong);
+    color: var(--brand-maroon);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .team-card__name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-ink);
+  }
+
+  .team-card__role {
+    margin: 0.15rem 0 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .team-card__bio {
+    margin: 0.875rem 0 0;
+    font-size: 0.825rem;
+    line-height: 1.55;
+    color: var(--text-body);
+  }
+
+  .team-card__links {
+    margin: 0.75rem 0 0;
+    display: flex;
+    gap: 0.875rem;
+    font-size: 0.75rem;
+  }
+
+  .team-card__links a {
+    color: var(--brand-maroon);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
