@@ -30,6 +30,8 @@ export type CoreMember = {
   bio: string;
   /** Optional headshot in public/press/. Renders initials until one exists. */
   headshot?: string;
+  /** Full-resolution original of the headshot, offered as a download for print. */
+  headshotFull?: string;
   github?: string;
   linkedin?: string;
   facebook?: string;
@@ -50,6 +52,7 @@ export const coreTeam: CoreMember[] = [
     name: "Simonee Ezekiel Mariquit",
     role: "Founder and lead. App architecture, campus data pipeline, releases.",
     headshot: "/press/simonee-ezekiel-mariquit.jpg",
+    headshotFull: "/press/full/simonee-ezekiel-mariquit.jpg",
     bio: "Simonee started Room TBA in January 2026 and is still its largest contributor. He works on the app architecture, the campus data pipeline that imports class schedules each term, and the release process. He also maintains Elbi GradeSim and runs Pizza & Friends.",
     github: "smmariquit",
     website: "https://stimmie.dev",
@@ -58,6 +61,7 @@ export const coreTeam: CoreMember[] = [
     name: "Ken Ramiscal",
     role: "Offline support, map, interface.",
     headshot: "/press/ken-ramiscal.jpg",
+    headshotFull: "/press/full/ken-ramiscal.jpg",
     bio: "Ken built the offline support that keeps Room TBA usable when campus signal drops, and he works across the map and the interface. He is the second-largest contributor to the project and a web designer and frontend developer at UPLB.",
     github: "Kenramiscal1106",
     website: "https://kendan.dev",
@@ -67,6 +71,7 @@ export const coreTeam: CoreMember[] = [
     name: "Eunice Almeyda",
     role: "Directions, map chrome, mobile interface.",
     headshot: "/press/eunice-almeyda.jpg",
+    headshotFull: "/press/full/eunice-almeyda.jpg",
     bio: "Eunice built the directions feature and much of the mobile map interface, including the bottom sheet and the search overlay students use on their phones. She also designed the Room TBA logo.",
     github: "unisA02",
     linkedin: "https://www.linkedin.com/in/eunice-almeyda-6a254a351/",
@@ -75,6 +80,7 @@ export const coreTeam: CoreMember[] = [
     name: "Simeon Ricalde",
     role: "Publicity and outreach.",
     headshot: "/press/simeon-ricalde.jpg",
+    headshotFull: "/press/full/simeon-ricalde.jpg",
     bio: "Simeon handles publicity and outreach for Room TBA, including press and campus communications. He is a student at UPLB and a member of the UPLB Mathematical Sciences Society.",
     github: "meonnn",
     website: "https://meonnn.github.io/",
@@ -84,6 +90,7 @@ export const coreTeam: CoreMember[] = [
     name: "Kalinaw Lukas Aom Bebis",
     role: "Interface, map, bug fixes.",
     headshot: "/press/kalinaw-lukas-aom-bebis.jpg",
+    headshotFull: "/press/full/kalinaw-lukas-aom-bebis.jpg",
     bio: "Lukas works on the Room TBA interface and map, and on the bug fixes that keep each term's release stable. He is a fullstack developer and a BS Computer Science undergraduate at UPLB.",
     github: "klnwlks",
     website: "https://lukasbebis.com",
@@ -247,22 +254,35 @@ export const screenshots: PressScreenshot[] = [
   },
 ];
 
-export type LogoAsset = { src: string; label: string; note: string };
+export type LogoAsset = {
+  src: string;
+  label: string;
+  note: string;
+  /** Pixel size of the file, so the preview keeps its real aspect ratio. */
+  width: number;
+  height: number;
+};
 
 export const logos: LogoAsset[] = [
   {
     src: "/icon.png",
     label: "App icon",
     note: "PNG, square. Use on light backgrounds.",
+    width: 458,
+    height: 512,
   },
   {
     src: "/icon-512.png",
     label: "App icon, 512px",
     note: "PNG. For print or large layouts.",
+    width: 512,
+    height: 512,
   },
   {
     src: "/og.png",
     label: "Social card",
     note: "1200x630 PNG. For link previews.",
+    width: 1200,
+    height: 630,
   },
 ];

@@ -26,8 +26,8 @@ function initials(name: string): string {
           class="team-card__photo"
           src={member.headshot}
           alt={`Headshot of ${member.name}`}
-          width="96"
-          height="96"
+          width="160"
+          height="160"
           loading="lazy"
         />
       ) : (
@@ -43,6 +43,16 @@ function initials(name: string): string {
   </div>
 
   <p class="team-card__bio">{member.bio}</p>
+
+  {
+    member.headshotFull && (
+      <p class="team-card__download">
+        <a href={member.headshotFull} download>
+          Download high-res photo
+        </a>
+      </p>
+    )
+  }
 
   {
     (member.github || member.linkedin || member.facebook || member.website) && (
@@ -88,8 +98,8 @@ function initials(name: string): string {
   }
 
   .team-card__photo {
-    width: 3rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: var(--radius-pill);
     flex-shrink: 0;
     object-fit: cover;
@@ -122,6 +132,18 @@ function initials(name: string): string {
     font-size: 0.825rem;
     line-height: 1.55;
     color: var(--text-body);
+  }
+
+  .team-card__download {
+    margin: 0.75rem 0 0;
+    font-size: 0.75rem;
+  }
+
+  .team-card__download a {
+    color: var(--brand-maroon);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .team-card__links {

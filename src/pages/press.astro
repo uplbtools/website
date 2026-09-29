@@ -81,13 +81,21 @@ import {
 
         <div class="lead-photo card">
           <span class="badge badge-maroon">Preferred lead image</span>
-          <div class="lead-photo__slot" role="img" aria-label="Team photo not yet available">
-            <span>Team photo</span>
-          </div>
+          <img
+            class="lead-photo__img"
+            src="/press/team.jpg"
+            alt="The uplb.tools core team outdoors at UPLB. From left: Eunice Almeyda, Kalinaw Lukas Aom Bebis, Simonee Ezekiel Mariquit, Ken Ramiscal and Simeon Ricalde."
+            width="1400"
+            height="1050"
+            loading="lazy"
+          />
           <p class="press-note">
-            The team photo is coming. Until then, ask us and we'll send what we
-            have. If your layout allows a group shot, we'd rather it ran than a
-            single headshot.
+            From left: Eunice Almeyda, Kalinaw Lukas Aom Bebis, Simonee Ezekiel
+            Mariquit, Ken Ramiscal and Simeon Ricalde. If your layout allows a
+            group shot, we'd rather it ran than a single headshot.
+          </p>
+          <p class="lead-photo__download">
+            <a href="/press/full/team.jpg" download>Download high-res team photo</a>
           </p>
         </div>
 
@@ -150,8 +158,8 @@ import {
         <ul class="logo-grid">
           {
             logos.map((logo) => (
-              <li class="logo-card card">
-                <img src={logo.src} alt={logo.label} width="64" height="64" loading="lazy" />
+              <li class:list={["logo-card card", { "logo-card--wide": logo.width / logo.height > 1.5 }]}>
+                <img src={logo.src} alt={logo.label} width={logo.width} height={logo.height} loading="lazy" />
                 <p class="logo-card__label">{logo.label}</p>
                 <p class="logo-card__note">{logo.note}</p>
                 <a href={logo.src} download>
@@ -347,20 +355,28 @@ import {
     padding: 1.25rem;
   }
 
-  .lead-photo__slot {
+  .lead-photo__img {
+    display: block;
+    width: 100%;
+    height: auto;
     margin: 0.875rem 0;
-    aspect-ratio: 16 / 9;
-    display: grid;
-    place-items: center;
-    border: 2px dashed var(--border-input);
     border-radius: var(--radius-md);
-    background: var(--bg-page);
-    color: var(--text-muted);
-    font-size: 0.9rem;
   }
 
   .lead-photo .press-note {
     margin-bottom: 0;
+  }
+
+  .lead-photo__download {
+    margin: 0.75rem 0 0;
+    font-size: 0.8rem;
+  }
+
+  .lead-photo__download a {
+    color: var(--brand-maroon);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .shot-list,
@@ -470,6 +486,17 @@ import {
   .logo-card img {
     margin: 0 auto 0.75rem;
     display: block;
+    width: auto;
+    height: 4rem;
+    max-width: 100%;
+  }
+
+  /* Wide assets like the 1200x630 social card fill the card instead of
+     being squeezed to icon height. */
+  .logo-card--wide img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
   }
 
   .logo-card__label {
