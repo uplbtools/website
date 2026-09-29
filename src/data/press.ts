@@ -64,6 +64,7 @@ export const coreTeam: CoreMember[] = [
   {
     name: "Eunice Almeyda",
     role: "Directions, map chrome, mobile interface.",
+    headshot: "/press/eunice-almeyda.jpg",
     bio: "Eunice built the directions feature and much of the mobile map interface, including the bottom sheet and the search overlay students use on their phones. She also designed the Room TBA logo.",
     github: "unisA02",
     linkedin: "https://www.linkedin.com/in/eunice-almeyda-6a254a351/",
