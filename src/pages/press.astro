@@ -158,8 +158,8 @@ import {
         <ul class="logo-grid">
           {
             logos.map((logo) => (
-              <li class="logo-card card">
-                <img src={logo.src} alt={logo.label} width="64" height="64" loading="lazy" />
+              <li class:list={["logo-card card", { "logo-card--wide": logo.width / logo.height > 1.5 }]}>
+                <img src={logo.src} alt={logo.label} width={logo.width} height={logo.height} loading="lazy" />
                 <p class="logo-card__label">{logo.label}</p>
                 <p class="logo-card__note">{logo.note}</p>
                 <a href={logo.src} download>
@@ -486,6 +486,17 @@ import {
   .logo-card img {
     margin: 0 auto 0.75rem;
     display: block;
+    width: auto;
+    height: 4rem;
+    max-width: 100%;
+  }
+
+  /* Wide assets like the 1200x630 social card fill the card instead of
+     being squeezed to icon height. */
+  .logo-card--wide img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
   }
 
   .logo-card__label {

@@ -254,22 +254,35 @@ export const screenshots: PressScreenshot[] = [
   },
 ];
 
-export type LogoAsset = { src: string; label: string; note: string };
+export type LogoAsset = {
+  src: string;
+  label: string;
+  note: string;
+  /** Pixel size of the file, so the preview keeps its real aspect ratio. */
+  width: number;
+  height: number;
+};
 
 export const logos: LogoAsset[] = [
   {
     src: "/icon.png",
     label: "App icon",
     note: "PNG, square. Use on light backgrounds.",
+    width: 458,
+    height: 512,
   },
   {
     src: "/icon-512.png",
     label: "App icon, 512px",
     note: "PNG. For print or large layouts.",
+    width: 512,
+    height: 512,
   },
   {
     src: "/og.png",
     label: "Social card",
     note: "1200x630 PNG. For link previews.",
+    width: 1200,
+    height: 630,
   },
 ];
