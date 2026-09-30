@@ -21,6 +21,20 @@ import Footer from "../components/Footer.astro";
       </p>
     </header>
 
+    {/* Update each month: copy the newest month's "Balance owed" and its last day here. */}
+    <section class="balance" aria-labelledby="current-balance">
+      <h2 id="current-balance">Current balance</h2>
+      <div class="summary">
+        <div class="summary-item summary-net">
+          <span class="summary-label">Owed to the maintainer, as of September 30, 2026</span>
+          <span class="summary-value">₱0.00</span>
+        </div>
+      </div>
+      <p class="receipt-note">
+        The project owes nothing. Every bill through September is paid.
+      </p>
+    </section>
+
     <section class="month" aria-labelledby="sep-2026">
       <h2 id="sep-2026">September 2026</h2>
 
@@ -98,6 +112,7 @@ import Footer from "../components/Footer.astro";
         </li>
         <li class="ledger-total">
           <div class="ledger-what">Balance owed</div>
+          {/* Newest month: keep in sync with Current balance at the top. */}
           <div class="ledger-amount">₱0.00</div>
         </li>
       </ul>
@@ -493,6 +508,14 @@ import Footer from "../components/Footer.astro";
 
   .month {
     margin-bottom: 2.5rem;
+  }
+
+  .balance {
+    margin-bottom: 2.5rem;
+  }
+
+  .balance .summary {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   h2 {
