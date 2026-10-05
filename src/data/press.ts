@@ -279,9 +279,9 @@ export const logos: LogoAsset[] = [
     height: 512,
   },
   {
-    src: "/og.png",
+    src: "/og.jpg",
     label: "Social card",
-    note: "1200x630 PNG. For link previews.",
+    note: "1200x630 JPEG. For link previews.",
     width: 1200,
     height: 630,
   },
