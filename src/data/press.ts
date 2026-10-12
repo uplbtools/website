@@ -56,6 +56,7 @@ export const coreTeam: CoreMember[] = [
     bio: "Simonee started Room TBA in January 2026 and is still its largest contributor. He works on the app architecture, the campus data pipeline that imports class schedules each term, and the release process. He also maintains Elbi GradeSim and runs Pizza & Friends.",
     github: "smmariquit",
     website: "https://stimmie.dev",
+    facebook: "https://www.facebook.com/stimmieuwu/",
   },
   {
     name: "Ken Ramiscal",
@@ -66,6 +67,7 @@ export const coreTeam: CoreMember[] = [
     github: "Kenramiscal1106",
     website: "https://kendan.dev",
     linkedin: "https://www.linkedin.com/in/ken-daniele-ramiscal-1684b3376/",
+    facebook: "https://www.facebook.com/dnrmscl",
   },
   {
     name: "Eunice Almeyda",
@@ -75,6 +77,7 @@ export const coreTeam: CoreMember[] = [
     bio: "Eunice built the directions feature and much of the mobile map interface, including the bottom sheet and the search overlay students use on their phones. She also designed the Room TBA logo.",
     github: "unisA02",
     linkedin: "https://www.linkedin.com/in/eunice-almeyda-6a254a351/",
+    facebook: "https://www.facebook.com/eunice.almeyda",
   },
   {
     name: "Simeon Ricalde",
@@ -85,6 +88,7 @@ export const coreTeam: CoreMember[] = [
     github: "meonnn",
     website: "https://meonnn.github.io/",
     linkedin: "https://www.linkedin.com/in/simeon-ricalde-218084380/",
+    facebook: "https://www.facebook.com/simeon.sombillaricalde/",
   },
   {
     name: "Kalinaw Lukas Aom Bebis",
@@ -95,6 +99,7 @@ export const coreTeam: CoreMember[] = [
     github: "klnwlks",
     website: "https://lukasbebis.com",
     linkedin: "https://www.linkedin.com/in/lukas-bebis/",
+    facebook: "https://www.facebook.com/kalinawlukasaom.condebebis",
   },
 ];
 
