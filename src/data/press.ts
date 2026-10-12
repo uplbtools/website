@@ -56,6 +56,7 @@ export const coreTeam: CoreMember[] = [
     bio: "Simonee started Room TBA in January 2026 and is still its largest contributor. He works on the app architecture, the campus data pipeline that imports class schedules each term, and the release process. He also maintains Elbi GradeSim and runs Pizza & Friends.",
     github: "smmariquit",
     website: "https://stimmie.dev",
+    facebook: "https://www.facebook.com/stimmieuwu/",
   },
   {
     name: "Ken Ramiscal",
@@ -85,6 +86,7 @@ export const coreTeam: CoreMember[] = [
     github: "meonnn",
     website: "https://meonnn.github.io/",
     linkedin: "https://www.linkedin.com/in/simeon-ricalde-218084380/",
+    facebook: "https://www.facebook.com/simeon.sombillaricalde/",
   },
   {
     name: "Kalinaw Lukas Aom Bebis",
