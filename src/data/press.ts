@@ -97,6 +97,7 @@ export const coreTeam: CoreMember[] = [
     github: "klnwlks",
     website: "https://lukasbebis.com",
     linkedin: "https://www.linkedin.com/in/lukas-bebis/",
+    facebook: "https://www.facebook.com/kalinawlukasaom.condebebis",
   },
 ];
 
