@@ -1,181 +1,145 @@
 #!/usr/bin/env python3
-"""Generate public/og.png (1200x630) for Open Graph embeds."""
+"""Generate public/og.jpg (1200x630) for Open Graph embeds.
+
+Layout rules:
+- Everything that must survive is inside the centered 630x630 square, because
+  Messenger, WhatsApp and iMessage often crop link previews to a square.
+- Brand maroon background with the campus photo as a maroon duotone, so the
+  photo adds place without competing with the text.
+- JPEG under 300 KB: WhatsApp drops previews for heavier images.
+
+Run: python3 scripts/generate-og-image.py
+"""
 
 from __future__ import annotations
 
 import colorsys
-import subprocess
-import tempfile
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 FONTS = Path(__file__).resolve().parent / "fonts"
 ICON = ROOT / "public" / "icon.png"
-GITHUB_SVG = ROOT / "public" / "brand/github-light.svg"
 PHOTO = ROOT / "public" / "uplb-bg.webp"
-OUT = ROOT / "public" / "og.png"
+OUT = ROOT / "public" / "og.jpg"
 
 W, H = 1200, 630
-PAD_X = 80
-PAD_BOTTOM = 64
-TEXT_MAX = 500
-ICON_SIZE = 68
-GH_ICON = 20
-
-WHITE = (255, 255, 255)
-CREAM = (248, 236, 234)
-SHADOW_SOFT = (8, 4, 4, 110)
-SHADOW_HARD = (0, 0, 0, 200)
+MAX_BYTES = 300_000
 
 
-def hsl_to_rgb(h: float, s: float, l: float) -> tuple[int, int, int]:
+def hsl(h: float, s: float, l: float) -> tuple[int, int, int]:
     r, g, b = colorsys.hls_to_rgb(h / 360, l / 100, s / 100)
     return round(r * 255), round(g * 255), round(b * 255)
 
 
-def paste_cover(base: Image.Image, overlay: Image.Image) -> None:
-    ow, oh = overlay.size
-    scale = max(W / ow, H / oh)
-    resized = overlay.resize((round(ow * scale), round(oh * scale)), Image.Resampling.LANCZOS)
-    left = (resized.width - W) // 2
-    top = (resized.height - H) // 2
-    base.paste(resized.crop((left, top, left + W, top + H)))
+MAROON_DEEP = hsl(5, 53, 13)
+MAROON = hsl(5, 53, 32)
+CREAM = hsl(20, 60, 92)
+WHITE = (255, 255, 255)
+MUTED = hsl(10, 25, 80)
 
 
-def draw_overlay(img: Image.Image) -> None:
-    """Bottom + left wash so type stays legible when scaled down."""
-    layer = Image.new("RGBA", (W, H))
-    px = layer.load()
-    for y in range(H):
-        for x in range(W):
-            bottom = max(0.0, (y - H * 0.24) / (H * 0.76)) ** 1.02
-            left = max(0.0, 1.0 - x / (W * 0.68)) ** 0.9
-            strength = min(1.0, bottom * 0.72 + left * 0.42)
-            alpha = int(55 + 205 * strength)
-            alpha = min(alpha, 245)
-            px[x, y] = (*hsl_to_rgb(5, 50, 12), alpha)
-    img.paste(layer, (0, 0), layer)
+def font(name: str, size: int) -> ImageFont.FreeTypeFont:
+    return ImageFont.truetype(FONTS / name, size)
 
 
-def measure(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTypeFont) -> tuple[int, int]:
-    box = draw.textbbox((0, 0), text, font=font)
-    return box[2] - box[0], box[3] - box[1]
+def background() -> Image.Image:
+    """Campus photo as a maroon duotone, darkened toward the center column."""
+    photo = Image.open(PHOTO).convert("L")
+    scale = max(W / photo.width, H / photo.height)
+    photo = photo.resize((round(photo.width * scale), round(photo.height * scale)), Image.Resampling.LANCZOS)
+    left, top = (photo.width - W) // 2, (photo.height - H) // 2
+    photo = photo.crop((left, top, left + W, top + H))
+    photo = ImageOps.autocontrast(photo, cutoff=1)
+    duo = ImageOps.colorize(photo, black=MAROON_DEEP, white=hsl(5, 45, 42))
+
+    # Radial-ish vignette: keep the photo visible at the edges, quiet in the
+    # middle where the text sits.
+    mask = Image.new("L", (W, H), 0)
+    d = ImageDraw.Draw(mask)
+    d.ellipse((W * 0.5 - 520, H * 0.5 - 360, W * 0.5 + 520, H * 0.5 + 360), fill=225)
+    mask = mask.filter(ImageFilter.GaussianBlur(120))
+    solid = Image.new("RGB", (W, H), MAROON_DEEP)
+    return Image.composite(solid, duo, mask)
 
 
-def load_github_icon(size: int) -> Image.Image:
-    with tempfile.NamedTemporaryFile(suffix=".png") as tmp:
-        subprocess.run(
-            ["rsvg-convert", "-w", str(size), "-h", str(size), str(GITHUB_SVG), "-o", tmp.name],
-            check=True,
-        )
-        return Image.open(tmp.name).convert("RGBA")
+def text_w(draw: ImageDraw.ImageDraw, text: str, f: ImageFont.FreeTypeFont) -> int:
+    box = draw.textbbox((0, 0), text, font=f)
+    return box[2] - box[0]
 
 
-def draw_shadow_text(
-    draw: ImageDraw.ImageDraw,
-    xy: tuple[int, int],
-    text: str,
-    font: ImageFont.FreeTypeFont,
-    fill: tuple[int, ...],
-) -> None:
-    x, y = xy
-    draw.text((x + 2, y + 3), text, fill=SHADOW_SOFT, font=font)
-    draw.text((x + 1, y + 2), text, fill=SHADOW_HARD, font=font)
-    draw.text((x, y), text, fill=fill, font=font)
+def centered(draw: ImageDraw.ImageDraw, y: int, text: str, f: ImageFont.FreeTypeFont, fill) -> None:
+    draw.text(((W - text_w(draw, text, f)) // 2, y), text, font=f, fill=fill)
 
 
-def draw_wordmark(
-    draw: ImageDraw.ImageDraw,
-    x: int,
-    y: int,
-    brand_font: ImageFont.FreeTypeFont,
-) -> int:
-    draw_shadow_text(draw, (x, y), "uplb", brand_font, WHITE)
-    uplb_w, brand_h = measure(draw, "uplb", brand_font)
-    dot_x = x + uplb_w
-    draw_shadow_text(draw, (dot_x, y), ".", brand_font, CREAM)
-    dot_w, _ = measure(draw, ".", brand_font)
-    draw_shadow_text(draw, (dot_x + dot_w, y), "tools", brand_font, WHITE)
-    tools_w, _ = measure(draw, "tools", brand_font)
-    return uplb_w + dot_w + tools_w, brand_h
+def chip(draw: ImageDraw.ImageDraw, x: int, y: int, name: str, what: str, bold, regular) -> int:
+    """Draw a pill with a bold tool name and a short description. Returns width."""
+    pad_x, h = 22, 52
+    name_w = text_w(draw, name, bold)
+    gap = 12
+    what_w = text_w(draw, what, regular)
+    w = pad_x + name_w + gap + what_w + pad_x
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=h // 2, fill=(255, 255, 255, 30), outline=(255, 255, 255, 70), width=2)
+    draw.text((x + pad_x, y + 12), name, font=bold, fill=WHITE)
+    draw.text((x + pad_x + name_w + gap, y + 13), what, font=regular, fill=MUTED)
+    return w
 
 
-def draw_sub_line(
-    draw: ImageDraw.ImageDraw,
-    x: int,
-    y: int,
-    left: str,
-    right: str,
-    regular: ImageFont.FreeTypeFont,
-    emphasis: ImageFont.FreeTypeFont,
-) -> None:
-    draw_shadow_text(draw, (x, y), left, emphasis, WHITE)
-    left_w, _ = measure(draw, left, emphasis)
-    mid = "  ·  "
-    draw_shadow_text(draw, (x + left_w, y), mid, regular, (255, 255, 255, 185))
-    mid_w, _ = measure(draw, mid, regular)
-    draw_shadow_text(draw, (x + left_w + mid_w, y), right, emphasis, WHITE)
+def chip_width(draw, name, what, bold, regular) -> int:
+    return 22 + text_w(draw, name, bold) + 12 + text_w(draw, what, regular) + 22
 
 
 def main() -> None:
-    base = Image.new("RGB", (W, H), hsl_to_rgb(5, 45, 16))
-    paste_cover(base, Image.open(PHOTO).convert("RGB"))
-    canvas = base.convert("RGBA")
-    draw_overlay(canvas)
-    draw = ImageDraw.Draw(canvas)
+    canvas = background().convert("RGBA")
+    overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
 
-    brand = ImageFont.truetype(FONTS / "Inter-SemiBold.ttf", 42)
-    title_lead = ImageFont.truetype(FONTS / "Inter-Medium.ttf", 33)
-    title = ImageFont.truetype(FONTS / "Raleway-Bold.ttf", 70)
-    sub_emphasis = ImageFont.truetype(FONTS / "Inter-SemiBold.ttf", 27)
-    sub_regular = ImageFont.truetype(FONTS / "Inter-Regular.ttf", 27)
-    meta = ImageFont.truetype(FONTS / "Inter-Medium.ttf", 21)
+    wordmark = font("Raleway-Bold.ttf", 112)
+    headline = font("Inter-SemiBold.ttf", 38)
+    chip_bold = font("Inter-SemiBold.ttf", 25)
+    chip_reg = font("Inter-Regular.ttf", 25)
+    foot = font("Inter-Medium.ttf", 22)
 
-    text_x = PAD_X
-    gap_sm = 14
-    gap_md = 22
-    gap_lg = 28
+    # Icon
+    icon_size = 96
+    icon = Image.open(ICON).convert("RGBA").resize((icon_size, icon_size), Image.Resampling.LANCZOS)
+    icon_y = 92
+    overlay.paste(icon, ((W - icon_size) // 2, icon_y), icon)
 
-    meta_text = "Open source on GitHub"
-    _, meta_h = measure(draw, meta_text, meta)
-    _, sub_h = measure(draw, "Room TBA", sub_emphasis)
-    _, title_h = measure(draw, "UP Los Baños", title)
-    _, lead_h = measure(draw, "Campus tools for", title_lead)
-    _, brand_h = measure(draw, "uplb.tools", brand)
+    # Wordmark: "uplb" white, "." cream, "tools" white, like the site header.
+    y = icon_y + icon_size + 18
+    parts = [("uplb", WHITE), (".", CREAM), ("tools", WHITE)]
+    total = sum(text_w(draw, p, wordmark) for p, _ in parts)
+    x = (W - total) // 2
+    for text, color in parts:
+        draw.text((x, y), text, font=wordmark, fill=color)
+        x += text_w(draw, text, wordmark)
 
-    row_h = max(ICON_SIZE, brand_h)
-    block_h = row_h + gap_lg + lead_h + gap_sm + title_h + gap_md + sub_h + gap_lg + meta_h
-    block_top = H - PAD_BOTTOM - block_h
+    # Headline
+    centered(draw, y + 138, "Free tools for UP Los Baños students", headline, WHITE)
 
-    icon_y = block_top + (row_h - ICON_SIZE) // 2
-    brand_y = block_top + (row_h - brand_h) // 2
-    wordmark_x = text_x + ICON_SIZE + 16
+    # Tool chips
+    chips = [("Room TBA", "find any room or class"), ("Elbi GradeSim", "GWA and Latin honors")]
+    gap = 16
+    widths = [chip_width(draw, n, w, chip_bold, chip_reg) for n, w in chips]
+    x = (W - (sum(widths) + gap * (len(chips) - 1))) // 2
+    chip_y = y + 212
+    for (name, what), w in zip(chips, widths):
+        chip(draw, x, chip_y, name, what, chip_bold, chip_reg)
+        x += w + gap
 
-    icon = Image.open(ICON).convert("RGBA")
-    icon = icon.resize((ICON_SIZE, ICON_SIZE), Image.Resampling.LANCZOS)
-    canvas.paste(icon, (text_x, icon_y), icon)
-    draw_wordmark(draw, wordmark_x, brand_y, brand)
+    centered(draw, chip_y + 82, "Open source, built by UPLB students", foot, MUTED)
 
-    y = block_top + row_h + gap_lg
-    draw_shadow_text(draw, (text_x, y), "Campus tools for", title_lead, (255, 255, 255, 220))
-    y += lead_h + gap_sm
-    draw_shadow_text(draw, (text_x, y), "UP Los Baños", title, WHITE)
-    y += title_h + gap_md
-    draw_sub_line(draw, text_x, y, "Room TBA", "Elbi GradeSim", sub_regular, sub_emphasis)
-    y += sub_h + gap_lg
+    canvas = Image.alpha_composite(canvas, overlay).convert("RGB")
 
-    gh = load_github_icon(GH_ICON)
-    gh_y = y + max(0, (meta_h - GH_ICON) // 2)
-    canvas.paste(gh, (text_x, gh_y), gh)
-    draw_shadow_text(draw, (text_x + GH_ICON + 8, y), meta_text, meta, (255, 255, 255, 215))
-
-    _, title2_w = measure(draw, "UP Los Baños", title)
-    assert title2_w <= TEXT_MAX
-
-    canvas.convert("RGB").save(OUT, optimize=True)
-    print(f"Wrote {OUT} ({W}x{H})")
+    for quality in (88, 84, 80, 76, 72):
+        canvas.save(OUT, "JPEG", quality=quality, optimize=True, progressive=True)
+        if OUT.stat().st_size <= MAX_BYTES:
+            break
+    size = OUT.stat().st_size
+    assert size <= MAX_BYTES, f"{OUT.name} is {size} bytes, over {MAX_BYTES}"
+    print(f"Wrote {OUT} ({W}x{H}, {size // 1024} KB, q={quality})")
 
 
 if __name__ == "__main__":

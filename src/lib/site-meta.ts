@@ -5,9 +5,9 @@ export const DEFAULT_TITLE = "uplb.tools";
 export const DEFAULT_DESCRIPTION =
   "Room TBA, Elbi GradeSim, and other open-source tools for UP Los Baños. Built by UPLB students on GitHub; not an official university site.";
 
-export const DEFAULT_OG_IMAGE = "/og.png";
+export const DEFAULT_OG_IMAGE = "/og.jpg";
 export const DEFAULT_OG_IMAGE_ALT =
-  "uplb.tools: Room TBA and Elbi GradeSim for UP Los Baños";
+  "uplb.tools: free tools for UP Los Baños students, including Room TBA for finding rooms and classes and Elbi GradeSim for GWA and Latin honors";
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 
