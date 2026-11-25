@@ -1,10 +1,18 @@
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/FigtreeVariable.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Room TBA house palette (see room-tba src/pages/donate.astro) */
-  --brand-maroon: hsl(5, 53%, 32%);
-  --brand-maroon-deep: hsl(5, 53%, 26%);
-  --brand-maroon-tint: hsl(5 53% 32% / 0.08);
-  --brand-maroon-tint-strong: hsl(5 53% 32% / 0.14);
-  --brand-maroon-line: hsl(5 53% 32% / 0.25);
+  /* UPLB Tools tokens, shared with GradeSim (gradesim-website src/lib/styles/tokens.css) */
+  --brand: hsl(359, 76%, 27%);
+  --brand-deep: hsl(359, 76%, 22%);
+  --brand-tint: hsl(359 76% 27% / 0.08);
+  --brand-tint-strong: hsl(359 76% 27% / 0.14);
+  --brand-line: hsl(359 76% 27% / 0.25);
   --brand-green: hsl(145, 63%, 22%);
   --brand-green-muted: hsl(145, 50%, 94%);
 
@@ -12,22 +20,16 @@
   --bg-card: hsl(5, 20%, 98%);
   --bg-elevated: hsl(0, 0%, 100%);
 
-  --border-card: hsl(5, 30%, 88%);
+  --border: hsl(5, 30%, 88%);
   --border-input: hsl(5, 30%, 80%);
 
-  --text-ink: hsl(5, 12%, 16%);
-  --text-body: hsl(0, 0%, 28%);
-  --text-muted: hsl(0, 0%, 40%);
-  --text-on-maroon: hsl(0, 0%, 100%);
+  --ink: hsl(5, 12%, 16%);
+  --body: hsl(0, 0%, 28%);
+  --muted: hsl(0, 0%, 40%);
+  --on-brand: hsl(0, 0%, 100%);
 
-  --font-sans:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
-  --font-display: "Raleway", var(--font-sans);
+  --font-sans: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-sans);
 
   --radius-sm: 0.5rem;
   --radius-md: 0.875rem;
@@ -44,6 +46,7 @@
   --shadow-lg:
     0 4px 10px hsl(5 35% 18% / 0.07), 0 20px 44px hsl(5 35% 18% / 0.11);
 
+  --focus-ring: 2px solid var(--brand);
   --measure: 42rem;
   --transition-fast: 0.15s ease;
   --header-height: 3.25rem;
@@ -61,7 +64,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 0.75rem);
   font-family: var(--font-sans);
-  color: var(--text-body);
+  color: var(--body);
   background-color: var(--bg-page);
   -webkit-font-smoothing: antialiased;
 }
@@ -104,8 +107,8 @@ body {
   clip: auto;
   white-space: normal;
   background: var(--bg-elevated);
-  color: var(--text-ink);
-  border: 2px solid var(--brand-maroon);
+  color: var(--ink);
+  border: 2px solid var(--brand);
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 600;
@@ -131,14 +134,14 @@ h1,
 h2,
 h3,
 h4 {
-  color: var(--text-ink);
+  color: var(--ink);
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
 p {
   line-height: 1.6;
-  color: var(--text-body);
+  color: var(--body);
 }
 
 a {
@@ -150,7 +153,7 @@ a {
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid var(--brand-maroon);
+  outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -171,13 +174,13 @@ input:focus-visible {
 }
 
 .btn-primary {
-  background: var(--brand-maroon);
-  color: var(--text-on-maroon);
+  background: var(--brand);
+  color: var(--on-brand);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-  background: var(--brand-maroon-deep);
+  background: var(--brand-deep);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
@@ -188,13 +191,13 @@ input:focus-visible {
 }
 
 .btn-secondary {
-  background: var(--brand-maroon-tint);
-  border-color: var(--brand-maroon-line);
-  color: var(--brand-maroon);
+  background: var(--brand-tint);
+  border-color: var(--brand-line);
+  color: var(--brand);
 }
 
 .btn-secondary:hover {
-  background: var(--brand-maroon-tint-strong);
+  background: var(--brand-tint-strong);
 }
 
 .btn-sm {
@@ -208,7 +211,7 @@ input:focus-visible {
    all; the lift does the separating now and the border just crisps the edge. */
 .card {
   background-color: var(--bg-elevated);
-  border: 1px solid var(--border-card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   transition:
@@ -229,14 +232,14 @@ input:focus-visible {
   font-weight: 600;
   border-radius: var(--radius-pill);
   background-color: var(--bg-page);
-  border: 1px solid var(--border-card);
-  color: var(--text-muted);
+  border: 1px solid var(--border);
+  color: var(--muted);
 }
 
 .badge-maroon {
-  background-color: var(--brand-maroon-tint);
-  border-color: var(--brand-maroon-line);
-  color: var(--brand-maroon);
+  background-color: var(--brand-tint);
+  border-color: var(--brand-line);
+  color: var(--brand);
 }
 
 .badge-green {
@@ -261,18 +264,18 @@ input:focus-visible {
 .section-subtitle {
   font-size: 1.0625rem;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--muted);
   max-width: var(--measure);
   text-wrap: pretty;
 }
 
 .text-link {
-  color: var(--brand-maroon);
+  color: var(--brand);
   font-weight: 600;
 }
 
 .text-link:hover {
-  color: var(--brand-maroon-deep);
+  color: var(--brand-deep);
   text-decoration: underline;
 }
 

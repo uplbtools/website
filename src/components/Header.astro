@@ -57,7 +57,7 @@ const { overlay = false } = Astro.props;
     min-height: var(--header-height);
     background-color: hsl(5 22% 96% / 0.92);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border-card);
+    border-bottom: 1px solid var(--border);
   }
 
   /* Home page: the hero photo runs under the header, so the bar goes
@@ -109,13 +109,13 @@ const { overlay = false } = Astro.props;
     font-size: 1rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: var(--text-ink);
+    color: var(--ink);
     white-space: nowrap;
     line-height: 1;
   }
 
   .logo-dot {
-    color: var(--brand-maroon);
+    color: var(--brand);
   }
 
   .main-header--overlay .logo-dot {
@@ -153,13 +153,13 @@ const { overlay = false } = Astro.props;
     padding: 0 0.75rem;
     font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--text-body);
+    color: var(--body);
     border-radius: var(--radius-pill);
   }
 
   .header-nav__link:hover {
-    color: var(--brand-maroon);
-    background: var(--brand-maroon-tint);
+    color: var(--brand);
+    background: var(--brand-tint);
   }
 
   .header-github-icon {

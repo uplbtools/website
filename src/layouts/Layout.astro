@@ -41,17 +41,14 @@ const pageTitle = title === DEFAULT_TITLE ? title : `${title} | ${SITE_NAME}`;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#7b2d26" />
+    <meta name="theme-color" content="#7b1113" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
+      rel="preload"
+      href="/fonts/FigtreeVariable.woff2"
+      as="font"
+      type="font/woff2"
       crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&display=swap"
-      rel="stylesheet"
     />
 
     <script
